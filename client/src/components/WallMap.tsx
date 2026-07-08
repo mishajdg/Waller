@@ -56,12 +56,12 @@ type ViewBox = {
 // Szerokość ścianki: 2190, wysokość: 945
 // Margines 120 SVG units z każdej strony
 // FULL_VIEW_BOX pokazuje CAŁĄ ściankę wycentrowaną z równym marginesem:
-const WALL_PAD = 4;
+const WALL_PAD = 1;
 const FULL_VIEW_BOX: ViewBox = {
-  x: 430 * WALL_PAD,          
-  y: 260 * WALL_PAD,
-  width: 1500,
-  height: 1500,
+  x: 1600 * WALL_PAD,          
+  y: 700* WALL_PAD,
+  width: 3500,
+  height: 3000,
 };
 
 // ============================================================
@@ -76,7 +76,7 @@ const FULL_VIEW_BOX: ViewBox = {
 // Po przesunięciu: marginesy równe ze wszystkich stron (~505 SVG units poziomo, ~228 pionowo)
 const WALL_OFFSET = {
   x: 0,   // Przesunięcie poziome: środek ścianki na środku canvasu
-  y: -400,   // Przesunięcie pionowe: środek ścianki na środku canvasu
+  y: 3400,   // Przesunięcie pionowe: środek ścianki na środku canvasu
 };
 
 // Granice całej mapy (z małym paddingiem)
@@ -114,6 +114,8 @@ function getBounds(points: Point[]) {
     minX: Math.min(...xs),
     maxX: Math.max(...xs),
     minY: Math.min(...ys),
+
+
     maxY: Math.max(...ys),
   };
 }
@@ -187,7 +189,7 @@ export function WallMap({
   // MIN_ZOOM_W = maksymalne przybliżenie (mały viewBox = duże przybliżenie)
   // MAX_ZOOM_W = maksymalne oddalenie (duży viewBox = mały zoom)
   const MIN_ZOOM_W = 300;              // Nie przybliżaj bardziej niż 300 SVG units
-  const MAX_ZOOM_W = FULL_VIEW_BOX.width * 1.1; // Nie oddalaj bardziej niż 110% widoku startowego
+  const MAX_ZOOM_W = FULL_VIEW_BOX.width * 1.8; // Nie oddalaj bardziej niż 110% widoku startowego
 
   const selectedBoulderSectorId =
     selection?.type === "boulder"
@@ -242,11 +244,11 @@ export function WallMap({
    * Sprawdź czy punkt (w przestrzeni sektora, przed WALL_OFFSET) jest widoczny w viewBox.
    * viewBox jest w przestrzeni SVG (po WALL_OFFSET), więc dodajemy offset do porównania.
    *
-   * Margines bardzo duży (600 SVG units) — zapobiega znikaniu pinów przy krawędziach.
-   * Przy FULL_VIEW_BOX.width=2430, margines 600 = ~25% szerokości — pin jest widoczny
+   * Margines bardzo duży (1000 SVG units) — zapobiega znikaniu pinów przy krawędziach.
+   * Przy FULL_VIEW_BOX.width=2430, margines 1000 = ~41% szerokości — pin jest widoczny
    * nawet gdy sektor jest częściowo poza okienkiem.
    */
-  const isPointInViewBox = (pos: { x: number; y: number }, vb: ViewBox, margin = 600) => {
+  const isPointInViewBox = (pos: { x: number; y: number }, vb: ViewBox, margin = 1000) => {
     const px = pos.x + WALL_OFFSET.x;
     const py = pos.y + WALL_OFFSET.y;
     return (
@@ -622,8 +624,8 @@ export function WallMap({
                 >
                   <line className="topo-line-halo" x1={segment.start.x} y1={segment.start.y} x2={segment.end.x} y2={segment.end.y} />
                   <line className="topo-line" x1={segment.start.x} y1={segment.start.y} x2={segment.end.x} y2={segment.end.y} />
-                  <circle className="topo-joint" cx={segment.start.x} cy={segment.start.y} r="4.5" />
-                  <circle className="topo-joint" cx={segment.end.x} cy={segment.end.y} r="4.5" />
+                  <circle className="topo-joint" cx={segment.start.x} cy={segment.start.y} r="0" />
+                  <circle className="topo-joint" cx={segment.end.x} cy={segment.end.y} r="0" />
                 </g>
               );
             })}

@@ -50,8 +50,8 @@
 import type { BoulderGrade, BoulderPin, GradeColorDefinition, HoldColorKey, Point, Sector, WallSegment } from "../types";
 
 export const MAP_SIZE = {
-  width: 3200,
-  height: 4000,
+  width: 8000,
+  height: 8000,
 };
 
 export const HOLD_COLORS: Record<HoldColorKey, { label: string; hex: string; text: string }> = {
@@ -95,7 +95,9 @@ export const GRADE_COLORS: Record<BoulderGrade, GradeColorDefinition> = {
 
 // Helper: tworzy cienki polygon (hitbox) wokół polyline
 // Offset ±T jednostek prostopadle do kierunku linii
-const T = 100; // grubość hitboxa (połowa)
+const SCALE = 2.5
+const scalePoint = (p: Point): Point => ({x: p.x * SCALE, y: p.y * SCALE,});
+const T = 0; // grubość hitboxa (połowa)
 
 export const sectors: Sector[] = [
 
@@ -107,16 +109,16 @@ export const sectors: Sector[] = [
     shortName: "Slab",
     polygon: [
      // Pasek ±30 SVG wokół: (2580,880)→(2400,1060)→(2100,1120)→(2075,1145)
-      { x: 1515, y: 835 },
-      { x: 1460, y: 910 },
-      { x: 1380, y: 950 },
-      { x: 1375, y: 1030 },
-      { x: 1315, y: 1010 },
-      { x: 1320, y: 950 },
-      { x: 1400, y: 910 },
-      { x: 1455, y: 835 },
+      scalePoint({ x: 1515, y: 865 }),
+      scalePoint({ x: 1485, y: 910 }),
+      scalePoint({ x: 1460, y: 940 }),
+      scalePoint({ x: 1375, y: 1030 }),
+      scalePoint({ x: 1315, y: 1010 }),
+      scalePoint({ x: 1320, y: 950 }),
+      scalePoint({ x: 1400, y: 910 }),
+      scalePoint({ x: 1455, y: 865 }),
     ],
-    label: { x: 1480, y: 950 },
+    label: scalePoint({ x: 1480, y: 950 }),
     fill: "#ffffff",
     settingDate: "2026-06-01",
     removalDate: "2026-07-15",
@@ -132,14 +134,14 @@ export const sectors: Sector[] = [
     shortName: "Prawy comp",
     polygon: [
       // Pasek wokół N8(2500,580)→N9(2580,880)
-      { x: 1490, y: 645 },
-      { x: 1515, y: 715 },
-      { x: 1515, y: 895 },
-      { x: 1455, y: 895 },
-      { x: 1455, y: 715 },
-      { x: 1430, y: 645 },
+      scalePoint({ x: 1490, y: 675 }),
+      scalePoint({ x: 1515, y: 715 }),
+      scalePoint({ x: 1515, y: 865 }),
+      scalePoint({ x: 1455, y: 865 }),
+      scalePoint({ x: 1455, y: 715 }),
+      scalePoint({ x: 1430, y: 675 }),
     ],
-    label: { x: 1600, y: 780 },
+    label: scalePoint({ x: 1600, y: 780 }),
     fill: "#ffffff",
     settingDate: "2026-06-01",
     removalDate: "2026-07-15",
@@ -155,14 +157,14 @@ export const sectors: Sector[] = [
     shortName: "Lewy comp",
     polygon: [
       // Pasek wokół N7(2400,310)→N8(2500,580)
-      { x: 1465, y: 480 },
-      { x: 1490, y: 565 },
-      { x: 1490, y: 705 },
-      { x: 1430, y: 705 },
-      { x: 1430, y: 565 },
-      { x: 1405, y: 480 },
+      scalePoint({ x: 1465, y: 480 }),
+      scalePoint({ x: 1490, y: 565 }),
+      scalePoint({ x: 1490, y: 675 }),
+      scalePoint({ x: 1430, y: 675 }),
+      scalePoint({ x: 1430, y: 565 }),
+      scalePoint({ x: 1405, y: 540 }),
     ],
-    label: { x: 1565, y: 590 },
+    label: scalePoint({ x: 1565, y: 590 }),
     fill: "#ffffff",
     settingDate: "2026-06-01",
     removalDate: "2026-07-15",
@@ -178,11 +180,11 @@ export const sectors: Sector[] = [
     shortName: "Prawy dach",
     polygon: [
       // Pasek wokół N5(1720,280)→N6(2100,340)→N7(2400,310)
-      { x: 1280, y: 420 },
-      { x: 1465, y: 480 },
-      { x: 1405, y: 540 },
-      { x: 1220, y: 480 },    ],
-    label: { x: 1390, y: 450 },
+      scalePoint({ x: 1280, y: 420 }),
+      scalePoint({ x: 1465, y: 480 }),
+      scalePoint({ x: 1405, y: 540 }),
+      scalePoint({ x: 1220, y: 480 }),    ],
+    label: scalePoint({ x: 1390, y: 450 }),
     fill: "#ffffff",
     settingDate: "2026-05-20",
     removalDate: "2026-07-01",
@@ -198,12 +200,12 @@ export const sectors: Sector[] = [
     shortName: "Lewy dach",
     polygon: [
       // Pasek wokół N3(1250,310)→N4(1500,290)→N5(1720,280)
-      { x: 1160, y: 280 },
-      { x: 1280, y: 420 },
-      { x: 1220, y: 480 },
-      { x: 1100, y: 340 },
+      scalePoint({ x: 1160, y: 280 }),
+      scalePoint({ x: 1280, y: 420 }),
+      scalePoint({ x: 1220, y: 480 }),
+      scalePoint({ x: 1100, y: 340 }),
     ],
-    label: { x: 1260, y: 370 },
+    label: scalePoint({ x: 1260, y: 370 }),
     fill: "#ffffff",
     settingDate: "2026-05-20",
     removalDate: "2026-07-01",
@@ -219,16 +221,16 @@ export const sectors: Sector[] = [
     shortName: "Beczka",
     polygon: [
       // Pasek wokół N1(870,260)→N2(870,340)→N3(1250,310)
-      { x: 885, y: 220 },
-      { x: 910, y: 240 },
-      { x: 980, y: 270 },
-      { x: 1160, y: 280 },
-      { x: 1100, y: 340 },
-      { x: 920, y: 330 },
-      { x: 850, y: 300 },
-      { x: 825, y: 280 },
+      scalePoint({ x: 885, y: 220 }),
+      scalePoint({ x: 910, y: 240 }),
+      scalePoint({ x: 980, y: 270 }),
+      scalePoint({ x: 1160, y: 280 }),
+      scalePoint({ x: 1100, y: 340 }),
+      scalePoint({ x: 920, y: 330 }),
+      scalePoint({ x: 850, y: 300 }),
+      scalePoint({ x: 825, y: 280 }),
     ],
-    label: { x: 1050, y: 290 },
+    label: scalePoint({ x: 1050, y: 290 }),
     fill: "#ffffff",
     settingDate: "2026-05-15",
     removalDate: "2026-06-27",
@@ -244,14 +246,14 @@ export const sectors: Sector[] = [
     shortName: "Logo",
     polygon: [
       // Pasek wokół H4(1800,720)→H5(1600,920)→H6(1200,920)
-      { x: 1160, y: 840 },
-      { x: 960, y: 845 },
-      { x: 955, y: 830 },
-      { x: 895, y: 770 },
-      { x: 900, y: 830 },
-      { x: 1100, y: 900 },
+      scalePoint({ x: 1110, y: 840 }),
+      scalePoint({ x: 960, y: 845 }),
+      scalePoint({ x: 955, y: 830 }),
+      scalePoint({ x: 895, y: 770 }),
+      scalePoint({ x: 900, y: 900 }),
+      scalePoint({ x: 1150, y: 900 }),
     ],
-    label: { x: 1040, y: 910 },
+    label: scalePoint({ x: 1040, y: 910 }),
     fill: "#ffffff",
     settingDate: "2026-05-08",
     removalDate: "2026-06-20",
@@ -267,12 +269,11 @@ export const sectors: Sector[] = [
     shortName: "Czujny pion",
     polygon: [
       // Pasek wokół H3(1680,530)→H4(1800,720)
-      { x: 1260, y: 690 },
-      { x: 1160, y: 840 },
-      { x: 1100, y: 900 },
-      { x: 1200, y: 750 },
+      scalePoint({ x: 1260, y: 690 }),
+      scalePoint({ x: 1110, y: 840 }),
+      scalePoint({ x: 1150, y: 900 }), 
     ],
-    label: { x: 1270, y: 800 },
+    label: scalePoint({ x: 1270, y: 800 }),
     fill: "#ffffff",
     settingDate: "2026-05-08",
     removalDate: "2026-06-20",
@@ -288,12 +289,12 @@ export const sectors: Sector[] = [
     shortName: "Mały przewis",
     polygon: [
       // Pasek wokół H2(1400,490)→H3(1680,530)
-      { x: 1180, y: 560 },
-      { x: 1260, y: 690 },
-      { x: 1200, y: 750 },
-      { x: 1120, y: 620 },
+      scalePoint({ x: 1180, y: 560 }),
+      scalePoint({ x: 1260, y: 690 }),
+      scalePoint({ x: 1200, y: 750 }),
+      scalePoint({ x: 1120, y: 620 }),
     ],
-    label: { x: 1290, y: 650 },
+    label: scalePoint({ x: 1290, y: 650 }),
     fill: "#ffffff",
     settingDate: "2026-05-15",
     removalDate: "2026-06-27",
@@ -309,13 +310,13 @@ export const sectors: Sector[] = [
     shortName: "Średni przewis",
     polygon: [
       // Pasek wokół H1(1100,530)→H2(1400,490)
-      { x: 1000, y: 600 },
-      { x: 1180, y: 560 },
-      { x: 1120, y: 620 },
-      { x: 940, y: 660 },
+      scalePoint({ x: 950, y: 600 }),
+      scalePoint({ x: 1180, y: 560 }),
+      scalePoint({ x: 1120, y: 620 }),
+      scalePoint({ x: 1000, y: 660 }),
     ],
-    label: { x: 1040, y: 580 },
-    fill: "#ffffff",
+    label: scalePoint({ x: 1040, y: 580 }),
+    fill: "#fff4fff",
     settingDate: "2026-05-15",
     removalDate: "2026-06-27",
     author: "Routesetter Karma",
@@ -330,14 +331,14 @@ export const sectors: Sector[] = [
     shortName: "Duży przewis",
     polygon: [
       // Pasek wokół H6(1200,920)→H1(1100,530)
-      { x: 950, y: 685 },
-      { x: 1000, y: 600 },
-      { x: 940, y: 660 },
-      { x: 955, y: 830 },
-      { x: 895, y: 770 },
-      { x: 890, y: 745 },
+      scalePoint({ x: 900, y: 685 }),
+      scalePoint({ x: 950, y: 600 }),
+      scalePoint({ x: 1000, y: 660 }),
+      scalePoint({ x: 955, y: 830 }),
+      scalePoint({ x: 895, y: 770 }),
+      scalePoint({ x: 890, y: 745 }),
     ],
-    label: { x: 820, y: 730 },
+    label: scalePoint({ x: 820, y: 730 }),
     fill: "#ffffff",
     settingDate: "2026-05-08",
     removalDate: "2026-06-20",
@@ -352,16 +353,16 @@ export const sectors: Sector[] = [
     name: "Spraywall",
     shortName: "Spray",
     polygon: [
-      { x: 510,  y: 340 },
-      { x: 710,  y: 340 },
-      { x: 710,  y: 490 },
-      { x: 650,  y: 490 },
-      { x: 650,  y: 900 },
-      { x: 710,  y: 900 },
-      { x: 710,  y: 1080 },
-      { x: 510,  y: 1080 },
+      scalePoint({ x: 510,  y: 340 }),
+      scalePoint({ x: 710,  y: 340 }),
+      scalePoint({ x: 710,  y: 490 }),
+      scalePoint({ x: 650,  y: 490 }),
+      scalePoint({ x: 650,  y: 900 }),
+      scalePoint({ x: 710,  y: 900 }),
+      scalePoint({ x: 710,  y: 1080 }),
+      scalePoint({ x: 510,  y: 1080 }),
     ],
-    label: { x: 500, y: 710 },
+    label: scalePoint({ x: 500, y: 710 }),
     fill: "#ffffff",
     settingDate: "2026-06-01",
     removalDate: "2026-08-01",
@@ -381,10 +382,8 @@ export const sectors: Sector[] = [
  *   Prawa kolumna: N7→N8→N9
  *   Slab: N9→N10→N11→N12
  *   Hexagon: H1→H2→H3→H4→H5→H6→H1 (zamknięty)
- *   Spraywall: osobny prostokąt z wcięciami
- */
-const SCALE = 1
-const scalePoint = (p: Point): Point => ({x: p.x * SCALE, y: p.y * SCALE,});
+ *   Spraywall: osobny prostokąt z wcięciami */
+
 export const wallSegments: WallSegment[] = [
   
   // Beczka: N1→N2 (stub pionowy) + N2→N3 (belka w prawo)
