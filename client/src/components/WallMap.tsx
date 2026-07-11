@@ -58,10 +58,10 @@ type ViewBox = {
 // FULL_VIEW_BOX pokazuje CAŁĄ ściankę wycentrowaną z równym marginesem:
 const WALL_PAD = 1;
 const FULL_VIEW_BOX: ViewBox = {
-  x: 1600 * WALL_PAD,          
-  y: 700* WALL_PAD,
-  width: 3500,
-  height: 3000,
+  x: 2750 * WALL_PAD,          
+  y: 2800* WALL_PAD,
+  width: 2600,
+  height: 2500,
 };
 
 // ============================================================
@@ -75,16 +75,16 @@ const FULL_VIEW_BOX: ViewBox = {
 // Offset = canvas_center - wall_center = (1600-1615, 700-707.5) = (-15, -8)
 // Po przesunięciu: marginesy równe ze wszystkich stron (~505 SVG units poziomo, ~228 pionowo)
 const WALL_OFFSET = {
-  x: 0,   // Przesunięcie poziome: środek ścianki na środku canvasu
-  y: 3400,   // Przesunięcie pionowe: środek ścianki na środku canvasu
+  x: 1380,   // Przesunięcie poziome: środek ścianki na środku canvasu
+  y: 2250,   // Przesunięcie pionowe: środek ścianki na środku canvasu
 };
 
 // Granice całej mapy (z małym paddingiem)
 const MAP_BOUNDS = {
-  minX: -20,
-  minY: -20,
-  maxX: MAP_SIZE.width + 200,
-  maxY: MAP_SIZE.height + 200,
+  minX: 1350,
+  minY: 1500,
+  maxX: MAP_SIZE.width - 1250,
+  maxY: MAP_SIZE.height - 1500,
 };
 
 const isActivationKey = (event: KeyboardEvent<SVGGElement>) =>
@@ -189,7 +189,7 @@ export function WallMap({
   // MIN_ZOOM_W = maksymalne przybliżenie (mały viewBox = duże przybliżenie)
   // MAX_ZOOM_W = maksymalne oddalenie (duży viewBox = mały zoom)
   const MIN_ZOOM_W = 300;              // Nie przybliżaj bardziej niż 300 SVG units
-  const MAX_ZOOM_W = FULL_VIEW_BOX.width * 1.8; // Nie oddalaj bardziej niż 110% widoku startowego
+  const MAX_ZOOM_W = FULL_VIEW_BOX.width * 1.2; // Nie oddalaj bardziej niż 110% widoku startowego
 
   const selectedBoulderSectorId =
     selection?.type === "boulder"
@@ -624,8 +624,8 @@ export function WallMap({
                 >
                   <line className="topo-line-halo" x1={segment.start.x} y1={segment.start.y} x2={segment.end.x} y2={segment.end.y} />
                   <line className="topo-line" x1={segment.start.x} y1={segment.start.y} x2={segment.end.x} y2={segment.end.y} />
-                  <circle className="topo-joint" cx={segment.start.x} cy={segment.start.y} r="0" />
-                  <circle className="topo-joint" cx={segment.end.x} cy={segment.end.y} r="0" />
+                  <circle className="topo-joint" cx={segment.start.x} cy={segment.start.y} r="8" />
+                  <circle className="topo-joint" cx={segment.end.x} cy={segment.end.y} r="8" />
                 </g>
               );
             })}

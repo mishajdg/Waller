@@ -279,15 +279,15 @@ h2 {
 .topo-plot { display: none; }
 
 .sector-hit-zone polygon {
-  fill: none;
+  fill: rgba(42, 138, 130, 0);
   stroke: none;
   cursor: pointer;
   transition: fill 180ms ease, stroke 180ms ease, opacity 180ms ease;
 }
 
 .sector-hit-zone.is-active polygon {
-  fill: transparent;
-  stroke: transparent;
+  fill: rgba(42, 138, 130, 0);
+  stroke: rgba(42, 138, 130, 0);
   stroke-width: 0;
 }
 
