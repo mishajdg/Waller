@@ -279,7 +279,7 @@ h2 {
 .topo-plot { display: none; }
 
 .sector-hit-zone polygon {
-  fill: rgba(42, 138, 130, 0);
+  fill: rgba(42, 138, 130, 0.712);
   stroke: none;
   cursor: pointer;
   transition: fill 180ms ease, stroke 180ms ease, opacity 180ms ease;

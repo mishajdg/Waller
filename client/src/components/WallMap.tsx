@@ -624,8 +624,8 @@ export function WallMap({
                 >
                   <line className="topo-line-halo" x1={segment.start.x} y1={segment.start.y} x2={segment.end.x} y2={segment.end.y} />
                   <line className="topo-line" x1={segment.start.x} y1={segment.start.y} x2={segment.end.x} y2={segment.end.y} />
-                  <circle className="topo-joint" cx={segment.start.x} cy={segment.start.y} r="8" />
-                  <circle className="topo-joint" cx={segment.end.x} cy={segment.end.y} r="8" />
+                  <circle className="topo-joint" cx={segment.start.x} cy={segment.start.y} r="4" />
+                  <circle className="topo-joint" cx={segment.end.x} cy={segment.end.y} r="4" />
                 </g>
               );
             })}
