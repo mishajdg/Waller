@@ -6,15 +6,10 @@
  * - Viewport (okienko) pokazuje ~50% mapy — reszta dostępna przez drag
  * - Zoom sektora centruje go w okienku
  */
-import {
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  type KeyboardEvent,
-  type MouseEvent,
-  type TouchEvent,
-} from "react";
+import { backgroundPolygons } from "../data/backgroundPolygons";
+import { depthToFill } from "@/data/polygonStyles";
+import { getSegmentImportance, importanceToStyle } from "@/data/lineStyles";
+import { useEffect, useMemo, useRef, useState, type KeyboardEvent, type MouseEvent, type TouchEvent,} from "react";
 import type { BoulderPin, Point, Sector, Selection, WallSegment } from "../types";
 import { getGradeColor, getHoldColor, MAP_SIZE, matLines } from "../data/gymMap";
 import { getBouldersForSectorSorted } from "../lib/boulderLayout";
@@ -126,7 +121,7 @@ function getZoomViewBox(sector: Sector, sectorBoulders: BoulderPin[], wallOffset
   // Musimy dodać wallOffset do wszystkich punktów żeby zoom trafił w właściwe miejsce.
   const offset = (p: { x: number; y: number }) => ({ x: p.x + wallOffset.x, y: p.y + wallOffset.y });
   const allPoints = [
-    ...sector.polygon.map(offset),
+    ...sector.polygons.flatMap((polygon) => polygon.points.map(offset)),
     offset(sector.label),
     ...sectorBoulders.map((b) => offset(b.position)),
   ];
@@ -267,7 +262,7 @@ export function WallMap({
    */
   const isSectorInViewBox = (sector: Sector, vb: ViewBox): boolean => {
     if (isPointInViewBox(sector.label, vb)) return true;
-    return sector.polygon.some((pt) => isPointInViewBox(pt, vb));
+    return sector.polygons.some((polygon) => polygon.points.some((pt) => isPointInViewBox(pt, vb)));
   };
 
   const visibleBoulders = zoomedSectorId
@@ -554,8 +549,21 @@ export function WallMap({
 
           {/* === WALL CONTENT GROUP — Wszystkie elementy Ŝianki z transformacją === */}
           <g transform={`translate(${WALL_OFFSET.x}, ${WALL_OFFSET.y})`}>
+            
             {/* Biały canvas mapy — obejmuje całą mapę (3200×1400) */}
             <rect className="topo-paper-base" x="10" y="10" width={MAP_SIZE.width - 20} height={MAP_SIZE.height - 20} rx="16" />
+            
+            {/* Background polygons */}
+            {backgroundPolygons.map((polygon) => (
+              <polygon
+                key={polygon.id}
+                className="background-polygon"
+                points={polygonToPoints(polygon.points)}
+                fill={depthToFill(polygon.depth)}
+                pointerEvents="none"
+              />
+            ))}
+
             {/* Linie materaca */}
             <g className="mat-line-layer" aria-hidden="true">
               {matLines.map((ml) => (
@@ -589,7 +597,14 @@ export function WallMap({
                     }
                   }}
                 >
-                  <polygon className="sector-polygon" points={polygonToPoints(sector.polygon)} />
+                 { sector.polygons.map((polygon, index) => (
+                    <polygon 
+                    key={index} 
+                    className="sector-polygon" 
+                    points={polygonToPoints(polygon.points)}
+                    style={{ fill: depthToFill(polygon.depth), }}
+                    />
+                  ))}
                 </g>
               );
             })}
@@ -607,6 +622,8 @@ export function WallMap({
                   : sectorHighlight === "removal"
                   ? "is-highlight-removal"
                   : "";
+              const importance = getSegmentImportance(segment.name);
+              const style = importanceToStyle(importance);
               return (
                 <g
                   key={segment.id}
@@ -622,10 +639,30 @@ export function WallMap({
                     }
                   }}
                 >
-                  <line className="topo-line-halo" x1={segment.start.x} y1={segment.start.y} x2={segment.end.x} y2={segment.end.y} />
-                  <line className="topo-line" x1={segment.start.x} y1={segment.start.y} x2={segment.end.x} y2={segment.end.y} />
-                  <circle className="topo-joint" cx={segment.start.x} cy={segment.start.y} r="4" />
-                  <circle className="topo-joint" cx={segment.end.x} cy={segment.end.y} r="4" />
+                  
+                  <
+                    line className="topo-line-halo" 
+                   x1={segment.start.x} 
+                   y1={segment.start.y} 
+                   x2={segment.end.x} 
+                   y2={segment.end.y} 
+                  />
+                  
+                  <
+                    line className="topo-line" 
+                   x1={segment.start.x} 
+                   y1={segment.start.y} 
+                   x2={segment.end.x} 
+                   y2={segment.end.y} 
+                  
+                  stroke={style.stroke}
+                  strokeWidth={style.width}
+                  strokeOpacity={style.opacity}
+                  strokeDasharray={style.dasharray}
+                  />
+                  
+                  <circle className="topo-joint" cx={segment.start.x} cy={segment.start.y} r="0" />
+                  <circle className="topo-joint" cx={segment.end.x} cy={segment.end.y} r="0" />
                 </g>
               );
             })}

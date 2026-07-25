@@ -10,6 +10,12 @@ export type Point = {
   y: number;
 };
 
+export type PolygonData = {
+  points: Point[];
+  depth: number;
+  id: string;
+};
+
 export type HoldColorKey =
   | "red"
   | "blue"
@@ -32,12 +38,17 @@ export type GradeColorDefinition = {
   text: string;
 };
 
+export type SectorPolygon = {
+  points: Point[];
+  depth: number;
+};
+
 export type Sector = {
   id: string;
   code: string;
   name: string;
   shortName: string;
-  polygon: Point[];
+  polygons: SectorPolygon[];
   label: Point;
   fill: string;
   settingDate: string;

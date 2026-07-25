@@ -279,7 +279,7 @@ h2 {
 .topo-plot { display: none; }
 
 .sector-hit-zone polygon {
-  fill: rgba(42, 138, 130, 0.712);
+  fill: rgba(42, 138, 130, 0.685);
   stroke: none;
   cursor: pointer;
   transition: fill 180ms ease, stroke 180ms ease, opacity 180ms ease;
@@ -299,14 +299,12 @@ h2 {
 }
 .topo-segment.is-muted { opacity: 0.02; }
 .topo-line-halo {
-  stroke: rgba(66, 82, 80, 0.048);
-  stroke-width: 13;
+  stroke: rgba(66, 82, 80, 0);
+  stroke-width: 0;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 .topo-line {
-  stroke: #2d2d2d;
-  stroke-width: 2.7;
   stroke-linecap: round;
   stroke-linejoin: round;
   transition: stroke 180ms ease, stroke-width 180ms ease;
@@ -317,8 +315,8 @@ h2 {
   transition: fill 180ms ease, opacity 180ms ease;
 }
 .topo-segment.is-active .topo-line {
-  stroke: #2f80c9;
-  stroke-width: 5.2;
+  stroke: #fcfbfb00;
+  stroke-width: 5;
 }
 .topo-segment.is-active .topo-joint { fill: #2f80c9; opacity: 0.9; }
 
