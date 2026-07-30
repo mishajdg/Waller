@@ -64,7 +64,10 @@ export const layoutBouldersByDifficulty = (boulders: BoulderPin[], segments: Wal
   const positioned: BoulderPin[] = [];
 
   grouped.forEach((sectorBoulders, sectorId) => {
-    const sectorSegments = getOrderedSectorSegments(sectorId, segments);
+    const allSegments = getOrderedSectorSegments(sectorId, segments);
+    const sectorSegments = allSegments.filter(
+      segment => 
+        segment.id.includes("main"));
     const sorted = sortBouldersByDifficulty(sectorBoulders);
 
     if (sectorSegments.length === 0) {

@@ -10,8 +10,9 @@ export function depthToFill(depth: number): string {
             return "#746b6b75";
         case 4:
             return "#635b5b38";
+        case 100:
+            return "#ffffff01";
         default:
             return "#635b5b";  
-        }   
-
+    }
 }

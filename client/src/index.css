@@ -318,6 +318,10 @@ h2 {
   stroke: #fcfbfb00;
   stroke-width: 5;
 }
+.topo-segment.keep-visible.is-active .topo-line {
+  stroke: #1f1f1fa9;
+  stroke-width: 2;
+}
 .topo-segment.is-active .topo-joint { fill: #2f80c9; opacity: 0.9; }
 
 .map-sector-label {

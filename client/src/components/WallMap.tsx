@@ -53,9 +53,9 @@ type ViewBox = {
 // FULL_VIEW_BOX pokazuje CAŁĄ ściankę wycentrowaną z równym marginesem:
 const WALL_PAD = 1;
 const FULL_VIEW_BOX: ViewBox = {
-  x: 2750 * WALL_PAD,          
-  y: 2800* WALL_PAD,
-  width: 2600,
+  x: 2710 * WALL_PAD,          
+  y: 2650* WALL_PAD,
+  width: 2500,
   height: 2500,
 };
 
@@ -136,7 +136,7 @@ function getZoomViewBox(sector: Sector, sectorBoulders: BoulderPin[], wallOffset
   const zoomH = Math.max(300, bounds.maxY - bounds.minY + padding * 2);
 
   let x = cx - zoomW / 2;
-  let y = cy - zoomH / 2;
+  let y = cy - zoomH / 2 + 380;
 
   // Clamp do granic mapy
   x = clamp(x, MAP_BOUNDS.minX, MAP_BOUNDS.maxX - zoomW);
@@ -565,11 +565,12 @@ export function WallMap({
             ))}
 
             {/* Linie materaca */}
+            {!activeSectorId &&(
             <g className="mat-line-layer" aria-hidden="true">
               {matLines.map((ml) => (
                 <line key={ml.id} className="mat-line" x1={ml.start.x} y1={ml.start.y} x2={ml.end.x} y2={ml.end.y} strokeDasharray={ml.dashed ? "5,5" : "undefined"} />
               ))}
-            </g>
+            </g>)}
 
             {/* Hitboxy sektorów */}
             <g className="sector-hit-layer">
@@ -624,10 +625,22 @@ export function WallMap({
                   : "";
               const importance = getSegmentImportance(segment.name);
               const style = importanceToStyle(importance);
+              const keepVisible = [
+                "seg-s01-1-main", "seg-s01-2-main", "seg-s01-3-main", "seg-s06-1-main", "seg-s06-2-main", "seg-s12-7-main", "seg-s12-6-main", "seg-s12-1-main", "seg-hex-s08-1-main", "seg-hex-s07-1.2-main"
+              ].includes(segment.id);
+
               return (
                 <g
                   key={segment.id}
-                  className={`topo-segment ${highlightClass} ${active ? "is-active" : ""} ${muted ? "is-muted" : ""}`}
+                  
+                  className={`
+                    topo-segment 
+                    ${highlightClass} 
+                    ${active ? "is-active" : ""} 
+                    ${muted ? "is-muted" : ""}
+                    ${keepVisible ? "keep-visible" : ""}
+                    `}
+
                   role="button"
                   tabIndex={0}
                   aria-label={`${segment.name}. Kliknij, aby otworzyć sektor.`}

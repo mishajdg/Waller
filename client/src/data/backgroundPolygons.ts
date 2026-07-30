@@ -3,7 +3,7 @@ const SCALE = 2.5
 const scalePoint = (p: Point): Point => ({x: p.x * SCALE, y: p.y * SCALE,});
 export const backgroundPolygons: PolygonData[] = 
 [
-    { id: "noga grzyba",
+    /*{ id: "noga grzyba",
         depth: 0, 
         points: [ 
                 scalePoint({ x: 1130, y: 870 }), 
@@ -13,5 +13,5 @@ export const backgroundPolygons: PolygonData[] =
                 scalePoint({ x: 1133, y: 722 }), 
                 scalePoint({ x: 1183.5, y: 790 })
                 ], 
-    }, 
+    },*/ 
 ]
