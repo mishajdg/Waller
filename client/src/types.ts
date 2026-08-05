@@ -55,6 +55,8 @@ export type Sector = {
   removalDate: string;
   author: string;
   description: string;
+  cameraOffset?: Point;
+  zoomScale?: number;
   highlight?: SectorHighlight | null;
 };
 

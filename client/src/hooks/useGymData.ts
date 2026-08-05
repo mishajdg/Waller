@@ -7,7 +7,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { supabase, isSupabaseConfigured, WALLER_GYM_ID } from "../lib/supabase";
 import { sectors as localSectors, wallSegments as localSegments, boulderPins as localBoulders } from "../data/gymMap";
-import type { BoulderPin, HoldColorKey, Point, Sector, SectorHighlight, WallSegment } from "../types";
+import type { BoulderPin, HoldColorKey, Point, Sector, SectorHighlight, SectorPolygon, WallSegment } from "../types";
 
 interface GymDataState {
   sectors: Sector[];
@@ -24,7 +24,8 @@ function mapSectorRow(row: any): Sector {
     code: row.code,
     name: row.name,
     shortName: row.short_name,
-    polygon: (row.polygon as Point[]) || [],
+    polygons: (row.polygons as SectorPolygon[]) || [],
+
     label: (row.label as Point) || { x: 0, y: 0 },
     fill: row.fill || "#ffffff",
     settingDate: row.setting_date || "",
@@ -46,7 +47,7 @@ function mapSegmentRow(row: any): WallSegment {
   };
 }
 
-function mapBoulderRow(row: any): BoulderPin {
+function mapBoulderRow(row: any): BoulderPin {console.log("Boulder DB:", row.position);
   return {
     id: row.id,
     name: row.name || "",
@@ -112,8 +113,16 @@ export function useGymData(gymId: string = WALLER_GYM_ID): GymDataState & {
 
       // Jeśli baza jest pusta — użyj danych lokalnych
       const dbSectors = (sectorsRes.data || []).map(mapSectorRow);
+      
+      console.log(dbSectors[0]);
+      console.log("DB polygons", dbSectors[0]?.polygons);
+      
       const dbSegments = (segmentsRes.data || []).map(mapSegmentRow);
+      
+
       const dbBoulders = (bouldersRes.data || []).map(mapBoulderRow);
+      console.log("DB boulders:", dbBoulders [0]);
+
 
       if (dbSectors.length === 0) {
         setState({

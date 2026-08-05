@@ -6,6 +6,7 @@
  * - Viewport (okienko) pokazuje ~50% mapy — reszta dostępna przez drag
  * - Zoom sektora centruje go w okienku
  */
+import { decorativeLabels } from "@/data/decorativeLabels";
 import { backgroundPolygons } from "../data/backgroundPolygons";
 import { depthToFill } from "@/data/polygonStyles";
 import { getSegmentImportance, importanceToStyle } from "@/data/lineStyles";
@@ -131,16 +132,23 @@ function getZoomViewBox(sector: Sector, sectorBoulders: BoulderPin[], wallOffset
   const cx = (bounds.minX + bounds.maxX) / 2;
   const cy = (bounds.minY + bounds.maxY) / 2;
 
-  // Okienko zoomu ma te same proporcje co FULL_VIEW_BOX
-  const zoomW = Math.max(300, bounds.maxX - bounds.minX + padding * 2);
-  const zoomH = Math.max(300, bounds.maxY - bounds.minY + padding * 2);
+  const offsetX = sector.cameraOffset?.x ?? 0
+  const offsetY = sector.cameraOffset?.y ?? 0
 
-  let x = cx - zoomW / 2;
-  let y = cy - zoomH / 2 + 380;
+  const zoomScale = sector.zoomScale ?? 1;
+
+  // Okienko zoomu ma te same proporcje co FULL_VIEW_BOX
+  const zoomW = Math.max(300, bounds.maxX - bounds.minX + padding * 2) * zoomScale;
+  const zoomH = Math.max(300, bounds.maxY - bounds.minY + padding * 2) * zoomScale;
+
+  let x = cx - zoomW / 2 + offsetX;
+  let y = cy - zoomH / 2 + 300 + offsetY; // + kompensacja wysokości drawera (żeby nie zasłaniał sektora)
 
   // Clamp do granic mapy
   x = clamp(x, MAP_BOUNDS.minX, MAP_BOUNDS.maxX - zoomW);
   y = clamp(y, MAP_BOUNDS.minY, MAP_BOUNDS.maxY - zoomH);
+
+
 
   return { x, y, width: zoomW, height: zoomH };
 }
@@ -564,6 +572,26 @@ export function WallMap({
               />
             ))}
 
+              {/* Decorative labels */}
+  {decorativeLabels.map((label) => (
+  <g
+    key={label.id}
+    transform={`translate(${label.position.x} ${label.position.y}) rotate(${label.rotation ?? 0})`}
+  >
+    <text
+      x={0}
+      y={0}
+      fontSize={label.fontSize}
+      opacity={label.opacity}
+      className="decorative-label"
+      pointerEvents="none"
+    >
+      {label.text}
+    </text>
+  </g>
+))}
+
+
             {/* Linie materaca */}
             {!activeSectorId &&(
             <g className="mat-line-layer" aria-hidden="true">
@@ -574,7 +602,8 @@ export function WallMap({
 
             {/* Hitboxy sektorów */}
             <g className="sector-hit-layer">
-              {sectors.map((sector) => {
+              {sectors.map((sector) => { if (sector.code === "1") {console.log("WallMap polygon:", sector.polygons);}
+              
               const active = activeSectorId === sector.id;
               const muted = Boolean(activeSectorId && !active);
               const highlightClass =
@@ -585,7 +614,8 @@ export function WallMap({
                   : "";
               return (
                 <g
-                  key={sector.id}
+                 
+                key={sector.id}
                   className={`sector-hit-zone ${highlightClass} ${active ? "is-active" : ""} ${muted ? "is-muted" : ""}`}
                   role="button"
                   tabIndex={0}
@@ -625,9 +655,7 @@ export function WallMap({
                   : "";
               const importance = getSegmentImportance(segment.name);
               const style = importanceToStyle(importance);
-              const keepVisible = [
-                "seg-s01-1-main", "seg-s01-2-main", "seg-s01-3-main", "seg-s06-1-main", "seg-s06-2-main", "seg-s12-7-main", "seg-s12-6-main", "seg-s12-1-main", "seg-hex-s08-1-main", "seg-hex-s07-1.2-main"
-              ].includes(segment.id);
+              const keepVisible = segment.id.includes("-main");
 
               return (
                 <g

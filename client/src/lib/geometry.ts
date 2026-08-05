@@ -76,7 +76,8 @@ export const pointInPolygon = (point: Point, polygon: Point[]) => {
 };
 
 export const getSectorAtPoint = (point: Point, sectors: Sector[]) =>
-  sectors.find((sector) => pointInPolygon(point, sector.polygon)) ?? null;
+  sectors.find((sector) => sector.polygons.some((polygon) =>
+    pointInPolygon(point, polygon.points ))) ?? null;
 
 export const getSegmentsForSector = (sectorId: string, segments: WallSegment[]) =>
   segments.filter((segment) => segment.sectorId === sectorId);

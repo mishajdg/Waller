@@ -95,7 +95,8 @@ export const sectors: Sector[] = [
     code: "1",
     name: "Slab",
     shortName: "Slab",
-
+    cameraOffset: {x:10 , y:-65},
+    zoomScale: 1.2,
     polygons: [
       
       {
@@ -136,7 +137,8 @@ export const sectors: Sector[] = [
     code: "2",
     name: "Prawy compwall",
     shortName: "Prawy comp",
-
+    cameraOffset: {x:20 , y:-10},
+    zoomScale: 1.8,
     polygons: [
       {
  //Polygon 13
@@ -174,6 +176,8 @@ export const sectors: Sector[] = [
     code: "3",
     name: "Lewy compwall",
     shortName: "Lewy comp",
+    cameraOffset: {x:0 , y:0},
+    zoomScale: 1.8,
 
     polygons: [
 {
@@ -212,7 +216,8 @@ export const sectors: Sector[] = [
     code: "4",
     name: "Prawy dach",
     shortName: "Prawy dach",
-
+    cameraOffset: {x:0 , y:80},
+    zoomScale: 1.3,
     polygons: [
 { 
   //Polygon 8
@@ -260,7 +265,7 @@ export const sectors: Sector[] = [
     code: "5",
     name: "Lewy dach",
     shortName: "Lewy dach",
-
+    cameraOffset: {x:40 , y:85},
     polygons: [
 {
   //Polygon 4
@@ -308,7 +313,7 @@ export const sectors: Sector[] = [
     settingDate: "2026-05-20",
     removalDate: "2026-07-01",
     author: "Routesetter Karma",
-    description: "Lewy dach nad główną częścią mapy.",
+    description: "Siła techniki się nie boi.",
   },
 
   // ─── S06: BECZKA — górna lewa belka (linia: N1→N2→N3) ─────────────────────
@@ -317,7 +322,8 @@ export const sectors: Sector[] = [
     code: "6",
     name: "Beczka",
     shortName: "Beczka",
- 
+ cameraOffset: {x:20 , y:0},
+    
 polygons: [
 { 
   //Polygon Hitbox Beczki
@@ -368,6 +374,9 @@ polygons: [
     code: "7",
     name: "Logo",
     shortName: "Logo",
+
+    cameraOffset: {x:0 , y:-100},
+    zoomScale: 0.9,
 
     polygons: [
       {
@@ -422,6 +431,9 @@ polygons: [
     name: "Czujny pion",
     shortName: "Czujny pion",
 
+    cameraOffset: {x:-30 , y:-145},
+    zoomScale: 1.5,
+
     polygons: [
       {
         //Polygon Hitbox Czujnego Pionu
@@ -459,6 +471,9 @@ polygons: [
     code: "9",
     name: "Mały przewis",
     shortName: "Mały przewis",
+    
+    cameraOffset: {x:-30 , y:10},
+    zoomScale: 1.9,
 
     polygons: [
       {
@@ -489,6 +504,9 @@ polygons: [
     name: "Średni przewis",
     shortName: "Średni przewis",
 
+    cameraOffset: {x:0 , y:-60},
+    zoomScale: 1,
+
     polygons: [
       {
         // Polygon 22
@@ -518,6 +536,9 @@ polygons: [
     code: "11",
     name: "Duży przewis",
     shortName: "Duży przewis",
+    
+    cameraOffset: {x:0 , y:10},
+    zoomScale: 1.1,
 
     polygons: [
   { 
@@ -565,6 +586,10 @@ polygons: [
    code: "12",
    name: "Spraywall",
    shortName: "Spray",
+   
+   cameraOffset: {x:0 , y:350},
+   zoomScale: 1.85,
+   
    polygons: 
    [
     { 
@@ -636,69 +661,69 @@ export const wallSegments: WallSegment[] = [
   { id: "seg-s01-3-main",       sectorId: "s01", name: "slab prawe V main",                    start: scalePoint({ x: 1350, y: 980 }), end: scalePoint({ x: 1343, y: 992 }), angleLabel: "slab" },
  
   // Prawy compwall:
-  { id: "seg-s02-1-main",       sectorId: "s02", name: "Prawy comp V main",                    start: scalePoint({ x: 1460, y: 675 }),  end: scalePoint({ x: 1485, y: 745 }), angleLabel: "compwall" },
+  { id: "seg-s02-1-main",    sectorId: "s02", name: "Prawy comp V main",                    start: scalePoint({ x: 1460, y: 675 }),  end: scalePoint({ x: 1485, y: 745 }), angleLabel: "compwall" },
   
-  { id: "seg-s02-2-main",       sectorId: "s02", name: "Prawy comp main main",                 start: scalePoint({ x: 1485, y: 745 }),  end: scalePoint({ x: 1485, y: 865 }), angleLabel: "compwall" },
+  { id: "seg-s02-2-main",    sectorId: "s02", name: "Prawy comp main main",                 start: scalePoint({ x: 1485, y: 745 }),  end: scalePoint({ x: 1485, y: 865 }), angleLabel: "compwall" },
   
-  { id: "seg-s02-3",       sectorId: "s02", name: "kant prawy compwall/slab main",        start: scalePoint({ x: 1505, y: 835 }),  end: scalePoint({ x: 1485, y: 865 }), angleLabel: "compwall" }, 
+  { id: "seg-s02-3",         sectorId: "s02", name: "kant prawy compwall/slab main",        start: scalePoint({ x: 1505, y: 835 }),  end: scalePoint({ x: 1485, y: 865 }), angleLabel: "compwall" }, 
   
-  { id: "seg-s02-4.1",     sectorId: "s02", name: "kant prawe V/prawy compwall",          start: scalePoint({ x: 1485, y: 745 }),  end: scalePoint({ x: 1500, y: 710 }), angleLabel: "compwall" }, 
-  { id: "seg-s02-4.2",     sectorId: "s02", name: "kant prawe V/lewy compwall",           start: scalePoint({ x: 1460, y: 675 }),  end: scalePoint({ x: 1500, y: 710 }), angleLabel: "compwall" }, 
+  { id: "seg-s02-4.1",       sectorId: "s02", name: "kant prawe V/prawy compwall",          start: scalePoint({ x: 1485, y: 745 }),  end: scalePoint({ x: 1500, y: 710 }), angleLabel: "compwall" }, 
+  { id: "seg-s02-4.2",       sectorId: "s02", name: "kant prawe V/lewy compwall",           start: scalePoint({ x: 1460, y: 675 }),  end: scalePoint({ x: 1500, y: 710 }), angleLabel: "compwall" }, 
   
-  { id: "seg-s02-5",       sectorId: "s02", name: "Prawy compwall pdst.",                 start: scalePoint({ x: 1500, y: 710 }),  end: scalePoint({ x: 1505, y: 835 }), angleLabel: "compwall" },
+  { id: "seg-s02-5",         sectorId: "s02", name: "Prawy compwall pdst.",                 start: scalePoint({ x: 1500, y: 710 }),  end: scalePoint({ x: 1505, y: 835 }), angleLabel: "compwall" },
  
 
   // Lewy compwall:
-   { id: "seg-s03-1.2-main",    sectorId: "s03", name: "Lewy comp V main",                     start: scalePoint({ x: 1435, y: 510 }),  end: scalePoint({ x: 1460, y: 595 }),  angleLabel: "compwall" },
-   { id: "seg-s03-1.2-main",    sectorId: "s03", name: "Lewy comp main main",                  start: scalePoint({ x: 1460, y: 595 }),  end: scalePoint({ x: 1460, y: 675 }),  angleLabel: "compwall" },
+   { id: "seg-s03-1.1-main", sectorId: "s03", name: "Lewy comp V main",                     start: scalePoint({ x: 1435, y: 510 }),  end: scalePoint({ x: 1460, y: 595 }),  angleLabel: "compwall" },
+   { id: "seg-s03-1.2-main", sectorId: "s03", name: "Lewy comp main main",                  start: scalePoint({ x: 1460, y: 595 }),  end: scalePoint({ x: 1460, y: 675 }),  angleLabel: "compwall" },
    
-   { id: "seg-s03-2",      sectorId: "s03", name: "kant lewe V/prawy compwall ",          start: scalePoint({ x: 1480, y: 540 }),  end: scalePoint({ x: 1460, y: 595 }), angleLabel: "compwall" },  
+   { id: "seg-s03-2",        sectorId: "s03", name: "kant lewe V/prawy compwall ",          start: scalePoint({ x: 1480, y: 540 }),  end: scalePoint({ x: 1460, y: 595 }), angleLabel: "compwall" },  
    
-   { id: "seg-s03-3",      sectorId: "s03", name: "kant lewy compwall/prawy dach",        start: scalePoint({ x: 1435, y: 510 }),  end: scalePoint({ x: 1480, y: 540 }), angleLabel: "compwall" }, 
+   { id: "seg-s03-3",        sectorId: "s03", name: "kant lewy compwall/prawy dach",        start: scalePoint({ x: 1435, y: 510 }),  end: scalePoint({ x: 1480, y: 540 }), angleLabel: "compwall" }, 
    
-   { id: "seg-s03-4",      sectorId: "s03", name: "kant prawe V/lewy compwall",           start: scalePoint({ x: 1460, y: 675 }),  end: scalePoint({ x: 1500, y: 710 }), angleLabel: "compwall" }, 
+   { id: "seg-s03-4",        sectorId: "s03", name: "kant prawe V/lewy compwall",           start: scalePoint({ x: 1460, y: 675 }),  end: scalePoint({ x: 1500, y: 710 }), angleLabel: "compwall" }, 
    
-   { id: "seg-s03-5",      sectorId: "s03", name: "Lewy compwall pdst.",                  start: scalePoint({ x: 1500, y: 710 }),  end: scalePoint({ x: 1480, y: 540 }), angleLabel: "compwall" },
+   { id: "seg-s03-5",        sectorId: "s03", name: "Lewy compwall pdst.",                  start: scalePoint({ x: 1500, y: 710 }),  end: scalePoint({ x: 1480, y: 540 }), angleLabel: "compwall" },
 
   // Prawy dach:
-   { id: "seg-s04-1-main",      sectorId: "s04", name: "Prawy dach main",                      start: scalePoint({ x: 1252, y: 445 }),  end: scalePoint({ x: 1435, y: 510 }), angleLabel: "dach" },
+   { id: "seg-s04-1-main", sectorId: "s04", name: "Prawy dach main",                        start: scalePoint({ x: 1252, y: 445 }),  end: scalePoint({ x: 1435, y: 510 }), angleLabel: "dach" },
   
-   { id: "seg-s04-2",      sectorId: "s04", name: "prawy dach dolne środkowe przełamanie",start: scalePoint({ x: 1354, y: 336 }),  end: scalePoint({ x: 1455, y: 414 }), angleLabel: "dach" },
+   { id: "seg-s04-2",      sectorId: "s04", name: "prawy dach dolne środkowe przełamanie",  start: scalePoint({ x: 1354, y: 336 }),  end: scalePoint({ x: 1455, y: 414 }), angleLabel: "dach" },
    
-   { id: "seg-s04-3.1",    sectorId: "s04", name: "prawy dach pdst.",                     start: scalePoint({ x: 1396, y: 281 }),  end: scalePoint({ x: 1503, y: 336 }), angleLabel: "dach" },
-   { id: "seg-s04-3.2",    sectorId: "s04", name: "prawy dach pdst. styczna z lewy comp", start: scalePoint({ x: 1503, y: 336 }),  end: scalePoint({ x: 1480, y: 540 }), angleLabel: "dach" },
+   { id: "seg-s04-3.1",    sectorId: "s04", name: "prawy dach pdst.",                       start: scalePoint({ x: 1396, y: 281 }),  end: scalePoint({ x: 1503, y: 336 }), angleLabel: "dach" },
+   { id: "seg-s04-3.2",    sectorId: "s04", name: "prawy dach pdst. styczna z lewy comp",   start: scalePoint({ x: 1503, y: 336 }),  end: scalePoint({ x: 1480, y: 540 }), angleLabel: "dach" },
    
-   { id: "seg-s04-4.1",    sectorId: "s04", name: "prawy/lewy dach środek góra",          start: scalePoint({ x: 1354, y: 336 }),  end: scalePoint({ x: 1252, y: 445 }), angleLabel: "dach" }, // frag=4
-   { id: "seg-s04-4.2",    sectorId: "s04", name: "prawy/lewy dach środek dół",           start: scalePoint({ x: 1396, y: 281 }),  end: scalePoint({ x: 1354, y: 336 }), angleLabel: "dach" },
+   { id: "seg-s04-4.1",    sectorId: "s04", name: "prawy/lewy dach środek góra",            start: scalePoint({ x: 1354, y: 336 }),  end: scalePoint({ x: 1252, y: 445 }), angleLabel: "dach" }, // frag=4
+   { id: "seg-s04-4.2",    sectorId: "s04", name: "prawy/lewy dach środek dół",             start: scalePoint({ x: 1396, y: 281 }),  end: scalePoint({ x: 1354, y: 336 }), angleLabel: "dach" },
    
-   { id: "seg-s04-5.1",    sectorId: "s04", name: "prawy dach środek bok",                start: scalePoint({ x: 1503, y: 336 }),  end: scalePoint({ x: 1455, y: 414 }), angleLabel: "dach" },
-   { id: "seg-s04-5.2",    sectorId: "s04", name: "prawy dach środek góra",               start: scalePoint({ x: 1435, y: 510 }),  end: scalePoint({ x: 1455, y: 414 }), angleLabel: "dach" },
+   { id: "seg-s04-5.1",    sectorId: "s04", name: "prawy dach środek bok",                  start: scalePoint({ x: 1503, y: 336 }),  end: scalePoint({ x: 1455, y: 414 }), angleLabel: "dach" },
+   { id: "seg-s04-5.2",    sectorId: "s04", name: "prawy dach środek góra",                 start: scalePoint({ x: 1435, y: 510 }),  end: scalePoint({ x: 1455, y: 414 }), angleLabel: "dach" },
    
-   { id: "seg-s04-6",      sectorId: "s04", name: "kant lewy compwall/prawy dach",        start: scalePoint({ x: 1435, y: 510 }),  end: scalePoint({ x: 1480, y: 540 }), angleLabel: "compwall" }, 
+   { id: "seg-s04-6",      sectorId: "s04", name: "kant lewy compwall/prawy dach",          start: scalePoint({ x: 1435, y: 510 }),  end: scalePoint({ x: 1480, y: 540 }), angleLabel: "compwall" }, 
 
 
   // Lewy dach:
-   { id: "seg-s05-1-main",      sectorId: "s05", name: "Lewy dach main",                       start: scalePoint({ x: 1128, y: 288 }),  end: scalePoint({ x: 1252, y: 445 }), angleLabel: "dach" },
+   { id: "seg-s05-1-main", sectorId: "s05", name: "Lewy dach main",                         start: scalePoint({ x: 1129, y: 288 }),  end: scalePoint({ x: 1252, y: 445 }), angleLabel: "dach" },
    
-   { id: "seg-s05-2.1",    sectorId: "s05", name: "lewy dach górne środkowe przełamanie", start: scalePoint({ x: 1141, y: 293 }),  end: scalePoint({ x: 1252, y: 445 }), angleLabel: "dach" },
-   { id: "seg-s05-2.2",    sectorId: "s05", name: "lewy dach dolne środkowe przełamanie", start: scalePoint({ x: 1313, y: 258 }),  end: scalePoint({ x: 1354, y: 336 }), angleLabel: "dach" },
+   { id: "seg-s05-2.1",    sectorId: "s05", name: "lewy dach górne środkowe przełamanie",   start: scalePoint({ x: 1141, y: 293 }),  end: scalePoint({ x: 1252, y: 445 }), angleLabel: "dach" },
+   { id: "seg-s05-2.2",    sectorId: "s05", name: "lewy dach dolne środkowe przełamanie",   start: scalePoint({ x: 1313, y: 258 }),  end: scalePoint({ x: 1354, y: 336 }), angleLabel: "dach" },
    
-   { id: "seg-s05-3.1",    sectorId: "s05", name: "lewy dach środek góra",                start: scalePoint({ x: 1354, y: 336 }),  end: scalePoint({ x: 1252, y: 445 }), angleLabel: "dach" }, 
-   { id: "seg-s05-3.2",    sectorId: "s05", name: "lewy dach środek dół",                 start: scalePoint({ x: 1396, y: 281 }),  end: scalePoint({ x: 1354, y: 336 }), angleLabel: "dach" },
+   { id: "seg-s05-3.1",    sectorId: "s05", name: "lewy dach środek góra",                  start: scalePoint({ x: 1354, y: 336 }),  end: scalePoint({ x: 1252, y: 445 }), angleLabel: "dach" }, 
+   { id: "seg-s05-3.2",    sectorId: "s05", name: "lewy dach środek dół",                   start: scalePoint({ x: 1396, y: 281 }),  end: scalePoint({ x: 1354, y: 336 }), angleLabel: "dach" },
    
-   { id: "seg-s05-4.1",    sectorId: "s05", name: "lewy dach górne boczne przełamanie",   start: scalePoint({ x: 1141, y: 293 }),  end: scalePoint({ x: 1313, y: 258 }), angleLabel: "dach" },
-   { id: "seg-s05-4.2",    sectorId: "s05", name: "lewy dach dolne boczne przełamanie",   start: scalePoint({ x: 1347, y: 221 }),  end: scalePoint({ x: 1313, y: 258 }), angleLabel: "dach" },
-   { id: "seg-s05-2.8",    sectorId: "s05", name: "beczka/lewy dach dół",                 start: scalePoint({ x: 1060, y: 260 }),  end: scalePoint({ x: 1141, y: 293 }), angleLabel: "dach" },
+   { id: "seg-s05-4.1",    sectorId: "s05", name: "lewy dach górne boczne przełamanie",     start: scalePoint({ x: 1141, y: 293 }),  end: scalePoint({ x: 1313, y: 258 }), angleLabel: "dach" },
+   { id: "seg-s05-4.2",    sectorId: "s05", name: "lewy dach dolne boczne przełamanie",     start: scalePoint({ x: 1347, y: 221 }),  end: scalePoint({ x: 1313, y: 258 }), angleLabel: "dach" },
+   { id: "seg-s05-2.8",    sectorId: "s05", name: "beczka/lewy dach dół",                   start: scalePoint({ x: 1060, y: 260 }),  end: scalePoint({ x: 1141, y: 293 }), angleLabel: "dach" },
    
-   { id: "seg-s05-5.1",    sectorId: "s05", name: "lewy dach pdst.",                      start: scalePoint({ x: 1347, y: 221 }),  end: scalePoint({ x: 1396, y: 281}),  angleLabel: "dach" }, 
-   { id: "seg-s05-5.2",    sectorId: "s05", name: "lewy dach pdst. styczna z beczką",     start: scalePoint({ x: 1347, y: 221 }),  end: scalePoint({ x: 1060, y: 260 }), angleLabel: "dach" },
+   { id: "seg-s05-5.1",    sectorId: "s05", name: "lewy dach pdst.",                        start: scalePoint({ x: 1347, y: 221 }),  end: scalePoint({ x: 1396, y: 281}),  angleLabel: "dach" }, 
+   { id: "seg-s05-5.2",    sectorId: "s05", name: "lewy dach pdst. styczna z beczką",       start: scalePoint({ x: 1347, y: 221 }),  end: scalePoint({ x: 1060, y: 260 }), angleLabel: "dach" },
    
   // Beczka:
   { id: "seg-s06-1-main",       sectorId: "s06", name: "beczka main V",                        start: scalePoint({ x: 873,  y: 239 }),  end: scalePoint({ x: 880, y: 245 }),  angleLabel: "beczka" },  
   
   { id: "seg-s06-2-main",       sectorId: "s06", name: "Beczka slab main",                     start: scalePoint({ x: 880,  y: 245 }),  end: scalePoint({ x: 950, y: 275 }),  angleLabel: "beczka" },
   
-  { id: "seg-s06-3-main",       sectorId: "s06", name: "Beczka main main",                     start: scalePoint({ x: 950,  y: 275 }),  end: scalePoint({ x: 1127, y: 288 }), angleLabel: "beczka" },
+  { id: "seg-s06-3-main",       sectorId: "s06", name: "Beczka main main",                     start: scalePoint({ x: 950,  y: 275 }),  end: scalePoint({ x: 1128.5, y: 288 }), angleLabel: "beczka" },
   
   { id: "seg-s06-4",       sectorId: "s06", name: "Beczka przełamanie do pionu",          start: scalePoint({ x: 954,  y: 280 }),  end: scalePoint({ x: 1131, y: 293 }), angleLabel: "beczka" },
   
@@ -706,24 +731,24 @@ export const wallSegments: WallSegment[] = [
   
   { id: "seg-s06-7",       sectorId: "s06", name: "beczka/lewy dach dół",                 start: scalePoint({ x: 1060, y: 260 }),  end: scalePoint({ x: 1127, y: 288 }), angleLabel: "beczka" },
   
-  { id: "seg-s06-8",       sectorId: "s06", name: "beczka/lewy dach mikro góra",          start: scalePoint({ x: 1127, y: 288 }),  end: scalePoint({ x: 1131, y: 293 }), angleLabel: "beczka" },
+  { id: "seg-s06-8",       sectorId: "s06", name: "beczka/lewy dach mikro góra",          start: scalePoint({ x: 1128.5, y: 288 }),  end: scalePoint({ x: 1132, y: 293 }), angleLabel: "beczka" },
   
   { id: "seg-s06-9",       sectorId: "s06", name: "Beczka slab ",                         start: scalePoint({ x: 954,  y: 280 }),  end: scalePoint({ x: 949, y: 275 }),  angleLabel: "beczka" },
   
 // ═══ GRZYB ═══
 
   // Logo:
-  { id: "seg-hex-s07-1.1-main",   sectorId: "s07", name: "logo main front",                      start: scalePoint({ x: 1060, y: 872}),  end: scalePoint({ x: 930, y: 875}),   angleLabel: "hex" },
-  { id: "seg-hex-s07-1.2-main",   sectorId: "s07", name: "logo main front",                      start: scalePoint({ x: 1130, y: 870 }),  end: scalePoint({ x: 1060, y: 872}),   angleLabel: "hex" },
+  { id: "seg-hex-s07-1.1-main",  sectorId: "s07", name: "logo main front",                      start: scalePoint({ x: 1060, y: 872}),  end: scalePoint({ x: 930, y: 875}),   angleLabel: "hex" },
+  { id: "seg-hex-s07-1.2-main",  sectorId: "s07", name: "logo main front",                      start: scalePoint({ x: 1130, y: 870 }),  end: scalePoint({ x: 1060, y: 872}),   angleLabel: "hex" },
   
-  { id: "seg-hex-s07-2-main",   sectorId: "s07", name: "logo main przewis",                    start: scalePoint({ x: 930, y: 875}),    end: scalePoint({ x: 920, y: 800}),   angleLabel: "hex" },  
+  { id: "seg-hex-s07-2-main",    sectorId: "s07", name: "logo main przewis",                    start: scalePoint({ x: 930, y: 875}),    end: scalePoint({ x: 920, y: 800}),   angleLabel: "hex" },  
   
-  { id: "seg-hex-s07-3",   sectorId: "s07", name: "kant lewego przewisu z logiem",        start: scalePoint({ x: 930, y: 875 }),   end: scalePoint({ x: 960, y: 805 }),    angleLabel: "hex" },
+  { id: "seg-hex-s07-3",         sectorId: "s07", name: "kant lewego przewisu z logiem",        start: scalePoint({ x: 930, y: 875 }),   end: scalePoint({ x: 960, y: 805 }),    angleLabel: "hex" },
   
-  { id: "seg-hex-s07-4.1", sectorId: "s07", name: "dolny kant duży i lewy przewis logo",  start: scalePoint({ x: 960, y: 805 }),   end: scalePoint({ x: 1040, y: 823 }),   angleLabel: "hex" },
-  { id: "seg-hex-s07-4.2", sectorId: "s07", name: "górny kant duży i lewy przewis logo",  start: scalePoint({ x: 960, y: 805 }),   end: scalePoint({ x: 920, y: 800 }),    angleLabel: "hex" },
+  { id: "seg-hex-s07-4.1",       sectorId: "s07", name: "dolny kant duży i lewy przewis logo",  start: scalePoint({ x: 960, y: 805 }),   end: scalePoint({ x: 1040, y: 823 }),   angleLabel: "hex" },
+  { id: "seg-hex-s07-4.2",       sectorId: "s07", name: "górny kant duży i lewy przewis logo",  start: scalePoint({ x: 960, y: 805 }),   end: scalePoint({ x: 920, y: 800 }),    angleLabel: "hex" },
   
-  { id: "seg-hex-s07-5",   sectorId: "s07", name: "lewy przewis logo pdst.",              start: scalePoint({ x: 1060, y: 871 }),  end: scalePoint({ x: 1040, y: 823 }),  angleLabel: "hex" },
+  { id: "seg-hex-s07-5",         sectorId: "s07", name: "lewy przewis logo pdst.",              start: scalePoint({ x: 1060, y: 871 }),  end: scalePoint({ x: 1040, y: 823 }),  angleLabel: "hex" },
   
   
   // Czujny pion:
@@ -732,22 +757,22 @@ export const wallSegments: WallSegment[] = [
   // Mały przewis:
   { id: "seg-hex-s09-1-main",     sectorId: "s09", name: "Mały przewis main",                    start: scalePoint({ x: 1150, y: 590 }),  end: scalePoint({ x: 1230, y: 720 }),  angleLabel: "hex" },
   
-  { id: "seg-hex-s09-2",   sectorId: "s09", name: "kant średniego i małego przewisu",     start: scalePoint({ x: 1150, y: 590 }),  end: scalePoint({ x: 1133, y: 722 }),  angleLabel: "hex" },
+  { id: "seg-hex-s09-2",          sectorId: "s09", name: "kant średniego i małego przewisu",     start: scalePoint({ x: 1150, y: 590 }),  end: scalePoint({ x: 1133, y: 722 }),  angleLabel: "hex" },
   
-  { id: "seg-hex-s09-3", sectorId: "s09", name: "mały przewis pdst.",                   start: scalePoint({ x: 1133, y: 722 }),  end: scalePoint({ x: 1183.5, y: 790 }),  angleLabel: "hex" },
+  { id: "seg-hex-s09-3",          sectorId: "s09", name: "mały przewis pdst.",                   start: scalePoint({ x: 1133, y: 722 }),  end: scalePoint({ x: 1183.5, y: 790 }),  angleLabel: "hex" },
   
-  { id: "seg-hex-s08-4",     sectorId: "s09", name: "kant czujny pion i mały przewis",      start: scalePoint({ x: 1230, y: 720 }),  end: scalePoint({ x: 1183.5, y: 790 }),angleLabel: "hex" },
+  { id: "seg-hex-s08-4",          sectorId: "s09", name: "kant czujny pion i mały przewis",      start: scalePoint({ x: 1230, y: 720 }),  end: scalePoint({ x: 1183.5, y: 790 }),angleLabel: "hex" },
     
   
   // Średni przewis: 
   { id: "seg-hex-s10-1-main",     sectorId: "s10", name: "średni przewis main",                  start: scalePoint({ x: 970, y: 630 }),   end: scalePoint({ x: 1150, y: 590 }),  angleLabel: "hex" },
   
-  { id: "seg-hex-s10-2.1", sectorId: "s10", name: "górny kant duży i średni przewis",     start: scalePoint({ x: 970, y: 630 }),   end: scalePoint({ x: 981, y: 668 }),   angleLabel: "hex" },
-  { id: "seg-hex-s10-2.2",   sectorId: "s10", name: "dolny kant duży i średni przewis",     start: scalePoint({ x: 981, y: 668 }),   end: scalePoint({ x: 1111, y: 726 }),  angleLabel: "hex" },
+  { id: "seg-hex-s10-2.1",        sectorId: "s10", name: "górny kant duży i średni przewis",     start: scalePoint({ x: 970, y: 630 }),   end: scalePoint({ x: 981, y: 668 }),   angleLabel: "hex" },
+  { id: "seg-hex-s10-2.2",        sectorId: "s10", name: "dolny kant duży i średni przewis",     start: scalePoint({ x: 981, y: 668 }),   end: scalePoint({ x: 1111, y: 726 }),  angleLabel: "hex" },
 
-  { id: "seg-hex-s10-3", sectorId: "s10", name: "średni przewis pdst.",                 start: scalePoint({ x: 1111, y: 726 }),  end: scalePoint({ x: 1133, y: 722 }), angleLabel: "hex" },
+  { id: "seg-hex-s10-3",          sectorId: "s10", name: "średni przewis pdst.",                 start: scalePoint({ x: 1111, y: 726 }),  end: scalePoint({ x: 1133, y: 722 }), angleLabel: "hex" },
   
-  { id: "seg-hex-s10-4",   sectorId: "s10", name: "kant średniego i małego przewisu",     start: scalePoint({ x: 1150, y: 590 }),  end: scalePoint({ x: 1133, y: 722 }), angleLabel: "hex" },
+  { id: "seg-hex-s10-4",          sectorId: "s10", name: "kant średniego i małego przewisu",     start: scalePoint({ x: 1150, y: 590 }),  end: scalePoint({ x: 1133, y: 722 }), angleLabel: "hex" },
 
   
   // Duży przewis:
@@ -835,10 +860,6 @@ export const matLines: Array<{ id: string; start: Point; end: Point; dashed?: bo
 
 ];
 
-/**
- * Przykładowe bouldery — fallback gdy Supabase nie odpowiada.
- * Pozycje dostosowane do nowej geometrii liniowej.
- */
 export const boulderPins: BoulderPin[] = [];
 
 export const getSectorById = (id: string) => sectors.find((sector) => sector.id === id);

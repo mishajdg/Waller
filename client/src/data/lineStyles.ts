@@ -12,7 +12,7 @@ export function importanceToStyle(level: "primary" | "secondary") {
     switch (level) {
         case "primary":
             return {
-                stroke: "#1f1f1fa9",      // prawie czarny #1f1f1f
+                stroke: "#1f1f1fbb",      // prawie czarny #1f1f1f
                 width: 4,
                 opacity: 0.8,
                 dasharray: undefined,   // linia ciągła

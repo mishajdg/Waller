@@ -337,40 +337,61 @@ h2 {
   font-weight: 650;
   letter-spacing: -0.025em;
 }
+
 .map-sector-label.is-active text {
   fill: #145fa3;
   font-weight: 800;
 }
+
 .map-sector-label.is-active circle { fill: #145fa3; }
 
+.decorative-label {
+fill: rgba(160, 160, 160, 0.5);  
+font-family: 'IBM Plex Sans', system-ui, sans-serif;
+font-weight: 700;
+letter-spacing: -0.03em;
+user-select: none;
+pointer-events: none;
+}
+
 .pin-layer { isolation: isolate; }
+
 .boulder-pin {
   cursor: pointer;
   transition: opacity 180ms ease, filter 180ms ease, transform 180ms ease;
 }
+
 .boulder-pin.is-muted { opacity: 0.22; }
+
 .pin-hit { fill: transparent; }
+
 .pin-dot-core {
   stroke: rgba(255, 255, 255, 0.92);
   stroke-width: 2.1;
   filter: url(#dotShadow);
 }
+
 .pin-dot.is-active .pin-dot-core,
+
 .pin-dot:focus-visible .pin-dot-core,
+
 .pin-dot:hover .pin-dot-core {
   stroke: #2f80c9;
   stroke-width: 3.4;
 }
+
 .pin-outer {
   fill: #ffffff;
   stroke: #232323;
   stroke-width: 2.4;
   filter: url(#pinShadow);
 }
+
 .pin-core {
   stroke: rgba(255, 255, 255, 0.9);
   stroke-width: 2;
 }
+
 .pin-grade {
   pointer-events: none;
   font-family: 'Space Grotesk', sans-serif;
