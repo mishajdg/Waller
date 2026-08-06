@@ -655,8 +655,10 @@ export function WallMap({
                   : "";
               const importance = getSegmentImportance(segment.name);
               const style = importanceToStyle(importance);
-              const keepVisible = segment.id.includes("-main");
-
+              const keepVisible = 
+              segment.name.toLowerCase().includes("main");
+              segment.name.toLowerCase().includes("pdst.");
+              segment.name.toLowerCase().includes("exception");
               return (
                 <g
                   key={segment.id}

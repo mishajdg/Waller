@@ -24,6 +24,10 @@ function mapSectorRow(row: any): Sector {
     code: row.code,
     name: row.name,
     shortName: row.short_name,
+    
+    cameraOffset: row.camera_offset,
+    zoomScale: row.zoom_scale ?? 1,
+    
     polygons: (row.polygons as SectorPolygon[]) || [],
 
     label: (row.label as Point) || { x: 0, y: 0 },

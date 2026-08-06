@@ -95,7 +95,7 @@ export const sectors: Sector[] = [
     code: "1",
     name: "Slab",
     shortName: "Slab",
-    cameraOffset: {x:10 , y:-65},
+    cameraOffset: {x:10 , y:0},
     zoomScale: 1.2,
     polygons: [
       
@@ -665,7 +665,7 @@ export const wallSegments: WallSegment[] = [
   
   { id: "seg-s02-2-main",    sectorId: "s02", name: "Prawy comp main main",                 start: scalePoint({ x: 1485, y: 745 }),  end: scalePoint({ x: 1485, y: 865 }), angleLabel: "compwall" },
   
-  { id: "seg-s02-3",         sectorId: "s02", name: "kant prawy compwall/slab main",        start: scalePoint({ x: 1505, y: 835 }),  end: scalePoint({ x: 1485, y: 865 }), angleLabel: "compwall" }, 
+  { id: "seg-s02-3",         sectorId: "s02", name: "kant prawy compwall/slab exception",        start: scalePoint({ x: 1505, y: 835 }),  end: scalePoint({ x: 1485, y: 865 }), angleLabel: "compwall" }, 
   
   { id: "seg-s02-4.1",       sectorId: "s02", name: "kant prawe V/prawy compwall",          start: scalePoint({ x: 1485, y: 745 }),  end: scalePoint({ x: 1500, y: 710 }), angleLabel: "compwall" }, 
   { id: "seg-s02-4.2",       sectorId: "s02", name: "kant prawe V/lewy compwall",           start: scalePoint({ x: 1460, y: 675 }),  end: scalePoint({ x: 1500, y: 710 }), angleLabel: "compwall" }, 
