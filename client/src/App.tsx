@@ -67,9 +67,9 @@ type SectorMetaDraft = {
  */
 const isAdminEntry = () => {
   if (typeof window === "undefined") return false;
-  const params = new URLSearchParams(window.location.search);
-  return params.get("admin") === "1" || window.location.pathname.includes("admin");
+  return window.location.pathname === "/admin";
 };
+
 
 function App() {
   // === AUTH ===
