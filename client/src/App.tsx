@@ -325,7 +325,7 @@ function App() {
         <div className="karma-header-brand">
           {/* Logo Karma PNG — biały symbol K w hexagonie (IMG_8101, RGBA) */}
           <img
-            src="public/Logo Karma.png"
+            src="/logo-karma.png"
             alt="Logo Karma Climbing"
             className="karma-logo-img"
             aria-label="Logo Karma"
