@@ -404,6 +404,7 @@ function App() {
         }}
         direction="bottom"
         modal={false}
+        repositionInputs={false} 
       >
           <DrawerContent className="karma-drawer">
             {/* === PRZYCISK ZAMKNIJ (X) ===
