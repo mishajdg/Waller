@@ -88,7 +88,7 @@ export const layoutBouldersByDifficulty = (boulders: BoulderPin[], segments: Wal
         const length = lengths[segmentIndex] || 1;
         if (targetDistance <= consumed + length || segmentIndex === sectorSegments.length - 1) {
           targetSegment = sectorSegments[segmentIndex];
-          localT = clamp((targetDistance - consumed) / length, 0.08, 0.92);
+          localT = clamp((targetDistance - consumed) / length, 0,1);
           break;
         }
         consumed += length;

@@ -656,16 +656,16 @@ polygons: [
 export const wallSegments: WallSegment[] = [
 
   // Slab: 
-  { id: "seg-s01-1-main",       sectorId: "s01", name: "slab lewy main",                       start: scalePoint({ x: 1485, y: 865 }), end: scalePoint({ x: 1438, y: 936 }),  angleLabel: "slab" },
-  { id: "seg-s01-2-main",       sectorId: "s01", name: "slab prawy main",                      start: scalePoint({ x: 1438, y: 936 }), end: scalePoint({ x: 1350, y: 980 }),  angleLabel: "slab" },
-  { id: "seg-s01-3-main",       sectorId: "s01", name: "slab prawe V main",                    start: scalePoint({ x: 1350, y: 980 }), end: scalePoint({ x: 1343, y: 992 }), angleLabel: "slab" },
+  { id: "seg-s01-1-main",    sectorId: "s01", name: "slab lewy main",                       start: scalePoint({ x: 1485, y: 865 }), end: scalePoint({ x: 1438, y: 936 }),  angleLabel: "slab" },
+  { id: "seg-s01-2-main",    sectorId: "s01", name: "slab prawy main",                      start: scalePoint({ x: 1438, y: 936 }), end: scalePoint({ x: 1350, y: 980 }),  angleLabel: "slab" },
+  { id: "seg-s01-3-main",    sectorId: "s01", name: "slab prawe V main",                    start: scalePoint({ x: 1350, y: 980 }), end: scalePoint({ x: 1343, y: 992 }), angleLabel: "slab" },
  
   // Prawy compwall:
   { id: "seg-s02-1-main",    sectorId: "s02", name: "Prawy comp V main",                    start: scalePoint({ x: 1460, y: 675 }),  end: scalePoint({ x: 1485, y: 745 }), angleLabel: "compwall" },
   
   { id: "seg-s02-2-main",    sectorId: "s02", name: "Prawy comp main main",                 start: scalePoint({ x: 1485, y: 745 }),  end: scalePoint({ x: 1485, y: 865 }), angleLabel: "compwall" },
   
-  { id: "seg-s02-3",         sectorId: "s02", name: "kant prawy compwall/slab exception",        start: scalePoint({ x: 1505, y: 835 }),  end: scalePoint({ x: 1485, y: 865 }), angleLabel: "compwall" }, 
+  { id: "seg-s02-3",         sectorId: "s02", name: "kant prawy compwall/slab exception",   start: scalePoint({ x: 1505, y: 835 }),  end: scalePoint({ x: 1485, y: 865 }), angleLabel: "compwall" }, 
   
   { id: "seg-s02-4.1",       sectorId: "s02", name: "kant prawe V/prawy compwall",          start: scalePoint({ x: 1485, y: 745 }),  end: scalePoint({ x: 1500, y: 710 }), angleLabel: "compwall" }, 
   { id: "seg-s02-4.2",       sectorId: "s02", name: "kant prawe V/lewy compwall",           start: scalePoint({ x: 1460, y: 675 }),  end: scalePoint({ x: 1500, y: 710 }), angleLabel: "compwall" }, 

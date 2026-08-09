@@ -365,6 +365,14 @@ pointer-events: none;
 
 .pin-hit { fill: transparent; }
 
+.pin-dot {
+  pointer-events: none;
+}
+
+.pin-zoomed {
+  pointer-events: auto;
+}
+
 .pin-dot-core {
   stroke: rgba(255, 255, 255, 0.92);
   stroke-width: 2.1;
@@ -395,16 +403,15 @@ pointer-events: none;
 .pin-grade {
   pointer-events: none;
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 10px;
+  font-size: 20px;
   font-weight: 850;
   letter-spacing: -0.03em;
 }
 .pin-zoomed.is-active .pin-outer {
-  stroke: #2f80c9;
+  stroke: #0d0d0ec9;
   stroke-width: 4.4;
 }
-.pin-zoomed:focus-visible .pin-outer,
-.pin-zoomed:hover .pin-outer { stroke: #2f80c9; }
+
 
 dt {
   color: #766f62;
@@ -477,6 +484,10 @@ dd {
   display: flex;
   flex-direction: column;
   gap: 12px;
+
+  touch-action: pan-y;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* === NAPRAWIONE KOLORY TEKSTU W DRAWERZE ===

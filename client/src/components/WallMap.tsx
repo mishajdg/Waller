@@ -742,18 +742,19 @@ export function WallMap({
             {visibleBoulders.map((boulder, index) => {
               const gradeColor = getGradeColor(boulder.grade);
               const holdColor = getHoldColor(boulder.holdColor);
-              const active = selection?.type === "boulder" && selection.id === boulder.id;
-              const muted = Boolean(zoomedSectorId && zoomedSectorId !== boulder.sectorId);
               const zoomed = Boolean(zoomedSectorId);
+              const active = zoomed &&selection?.type === "boulder" && selection.id === boulder.id;
+              const muted = Boolean(zoomedSectorId && zoomedSectorId !== boulder.sectorId);
+          
               return (
                 <g
                   key={boulder.id}
                   className={`boulder-pin ${zoomed ? "pin-zoomed" : "pin-dot"} ${active ? "is-active" : ""} ${muted ? "is-muted" : ""}`}
                   transform={`translate(${boulder.position.x} ${boulder.position.y})`}
-                  role="button"
-                  tabIndex={0}
+                  role={zoomed?"button":undefined}
+                  tabIndex={zoomed? 0:undefined}
                   aria-label={`${index + 1}. Boulder, trudność ${boulder.grade}, chwyty ${holdColor.label}, autor ${boulder.author}.`}
-                  onClick={(e) => {
+                  onClick={zoomed?(e) => {
                     if (hasDraggedRef.current) return;
                     e.stopPropagation();
                     // Zawsze ustawiamy zoom na sektor bouldera i informujemy App.
@@ -763,29 +764,29 @@ export function WallMap({
                     setZoomedSectorId(boulder.sectorId);
                     onZoomSectorChange?.(boulder.sectorId);
                     onSelectBoulder(boulder.id);
-                  }}
-                  onKeyDown={(e) => {
+                  }:undefined}
+                  onKeyDown={zoomed?(e) => {
                     if (isActivationKey(e)) {
                       e.preventDefault();
                       setZoomedSectorId(boulder.sectorId);
                       onZoomSectorChange?.(boulder.sectorId);
                       onSelectBoulder(boulder.id);
                     }
-                  }}
+                  }:undefined}
                 >
                   {zoomed ? (
                     <>
                       <circle className="pin-hit" r="30" />
-                      <circle className="pin-outer" r="18" />
-                      <circle className="pin-core" r="14" fill={gradeColor.hex} />
+                      <circle className="pin-outer" r="20" />
+                      <circle className="pin-core" r="20" fill={gradeColor.hex} />
                       <text className="pin-grade" y="5" textAnchor="middle" fill={gradeColor.text}>
                         {boulder.grade}
                       </text>
                     </>
                   ) : (
                     <>
-                      <circle className="pin-hit" r="24" />
-                      <circle className="pin-dot-core" r="7" fill={gradeColor.hex} />
+                   
+                      <circle className="pin-dot-core" r="16" fill={gradeColor.hex} />
                     </>
                   )}
                 </g>
