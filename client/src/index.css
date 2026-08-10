@@ -171,29 +171,32 @@ h2 {
   max-width: 480px;      /* ogranicz do szerokości telefonu */
 }
 
-.boulder-count-overlay {
+.boulder-count-overlay {  /* === LICZNIK BOULDERÓW: wyświetlany w prawym dolnym rogu mapy ===
+   * Aby zmienić pozycję: zmień right i bottom.
+   * Aby zmienić rozmiar: zmień padding i font-size w strong i span. */
   position: absolute;
   z-index: 5;
   right: clamp(14px, 2.8vw, 28px);
   bottom: clamp(14px, 2.8vw, 28px);
-  display: inline-flex;
-  align-items: baseline;
+  display: block;
+  align-items: center;
   gap: 10px;
   max-width: min(360px, calc(100% - 28px));
-  padding: 10px 16px 11px;
+  padding: 18px 24px 22px;
   border: 1px solid rgba(41, 37, 30, 0.12);
-  border-radius: 999px;
+  border-radius: 20px;
   color: #27231e;
   background: rgba(255, 250, 240, 0.74);
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(5px);
   box-shadow: 0 14px 38px rgba(58, 47, 31, 0.16);
-  pointer-events: none;
+  pointer-events: auto;
+  width: 170px;
 }
 
 .boulder-count-overlay strong {
   font-family: 'Space Grotesk', sans-serif;
   font-size: clamp(1.5rem, 4vw, 2.45rem);
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: -0.06em;
   line-height: 1;
 }
@@ -205,6 +208,96 @@ h2 {
   letter-spacing: 0.06em;
   line-height: 1.1;
   text-transform: uppercase;
+}
+
+/* === ROZWINIĘTY LICZNIK BOULDERÓW === */
+
+.boulder-count-overlay.is-open {
+  display: block;
+  border-radius: 28px;
+  padding: 18px 24px 22px;
+  width: 170px;
+  max-width: calc(100% - 28px);
+}
+
+/* Przycisk otwierający/zamykający */
+.boulder-count-button {
+  margin-left: 0px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 6px 0;
+  border: none;
+  background: transparent;
+
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+/* === STRZAŁKA LICZNIKA BOULDERÓW === */
+
+.boulder-count-chevron {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 20px;
+  height: 20px;
+
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1;
+  
+  transition: transform 0.2s ease;
+}
+
+/* Obrót tej samej strzałki po rozwinięciu */
+.boulder-count-chevron.is-open {
+  transform: rotate(180deg);
+}
+
+/* Lista poziomów */
+.boulder-grade-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+/* Jeden wiersz */
+.boulder-grade-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  width: 100%;
+}
+
+/* "POZIOM 1" */
+.boulder-grade-row span {
+  color: #62594c;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Liczba boulderów */
+.boulder-grade-row strong {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.boulder-count-label {
+  text-align: center;
+  margin-left: 6px;
 }
 
 .map-card {
@@ -665,6 +758,9 @@ dd {
     right: 12px;
     bottom: 12px;
     padding: 8px 12px 9px;
+    pointer-events: auto;  /* pozwala tapnąć w overlay i zobaczyć boulder count w inspektorze */
+    position: absolute;
+    z-index: 100;
   }
 
   .boulder-count-overlay span {
@@ -1165,33 +1261,10 @@ dd {
   stroke-width: 0;
 }
 
-.topo-segment.is-highlight-new .topo-line-halo {
-  stroke: rgba(31, 157, 103, 0.32);
-  stroke-width: 17;
-}
-
-.topo-segment.is-highlight-removal .topo-line-halo {
-  stroke: rgba(207, 64, 54, 0.30);
-  stroke-width: 17;
-}
-
-.topo-segment.is-highlight-new .topo-line {
-  stroke: #1f9d67;
-  stroke-width: 4.4;
-}
-
-.topo-segment.is-highlight-removal .topo-line {
-  stroke: #cf4036;
-  stroke-width: 4.4;
-}
-
 .topo-segment.is-active.is-highlight-new .topo-line,
 .topo-segment.is-active.is-highlight-removal .topo-line {
   stroke-width: 5.6;
 }
-
-.topo-segment.is-highlight-new .topo-joint { fill: #1f9d67; opacity: 0.88; }
-.topo-segment.is-highlight-removal .topo-joint { fill: #cf4036; opacity: 0.88; }
 
 .map-sector-label.is-highlight-new text { fill: #0f6842; font-weight: 850; }
 .map-sector-label.is-highlight-removal text { fill: #9f2f28; font-weight: 850; }

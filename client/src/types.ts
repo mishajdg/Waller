@@ -30,7 +30,24 @@ export type HoldColorKey =
   | "pink";
 
 export type BoulderGrade = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+
 export type SectorHighlight = "new" | "removal";
+
+export type SectorHighlightMode =
+| "text"
+| "background"
+| "text-background";
+
+export type SectorHighlightUnderline =
+| "none"
+| "solid"
+| "dashed";
+
+export type SectorHighlightStyle = {
+  color: string;
+  mode: SectorHighlightMode;
+  underline: SectorHighlightUnderline;
+};
 
 export type GradeColorDefinition = {
   label: string;

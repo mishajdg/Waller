@@ -102,6 +102,7 @@ function App() {
   const [metaSaved, setMetaSaved] = useState(false);
   // Lokalne draft usunięć — bouldery zaznaczone do usunięcia, ale jeszcze nie wysłane do Supabase
   const [pendingDeletes, setPendingDeletes] = useState<Set<string>>(new Set());
+  const [showGradeBreakdown, setShowGradeBreakdown] = useState(false);
 
   const selectedSector = useMemo(() => sectors.find((sector) => sector.id === zoomedSectorId) ?? null, [sectors, zoomedSectorId]);
   const selectedSectorBoulders = useMemo(
@@ -129,6 +130,8 @@ function App() {
 
   const visibleBoulderCount = selectedSector ? selectedSectorBoulders.length : boulders.length;
   const overlayLabel = selectedSector ? `bouldery w sektorze ${selectedSector.code}` : "bouldery na mapie";
+  const gradeCounts = Array.from({ length: 10 }, (_, index) => {const grade = index + 1; 
+    return { grade, count: boulders.filter((boulder) => boulder.grade === grade).length }; });
   const addDraftGrade = addDraft ? parseBoulderGrade(addDraft.gradeInput) : null;
   const addDraftGradeColor = addDraftGrade ? GRADE_COLORS[addDraftGrade] : null;
   const addDraftHoldColor = addDraft ? HOLD_COLORS[addDraft.holdColor] : null;
@@ -353,10 +356,48 @@ function App() {
 
       <section className="map-workspace" aria-label="Mapa sektorów Karma">
         <div className="map-stage">
-          <div className="boulder-count-overlay" aria-label={`${visibleBoulderCount} ${overlayLabel}`}>
-            <strong>{visibleBoulderCount}</strong>
-            <span>{overlayLabel}</span>
-          </div>
+          
+          <div
+  className={`boulder-count-overlay ${
+    showGradeBreakdown ? "is-open" : "" 
+  }`}
+  onClick={() => setShowGradeBreakdown((open) => !open)}
+    
+>
+  
+  <button
+    type="button"
+    className="boulder-count-button"
+    aria-expanded={showGradeBreakdown}
+    aria-label="Liczba boulderów według trudności"
+  >
+    <strong>{visibleBoulderCount}</strong>
+    <span className="boulder-count-label">
+      BOULDERY
+      <br />
+      NA MAPIE
+    </span>
+    
+    <span className={`boulder-count-chevron ${showGradeBreakdown ?
+    "is-open" : ""
+  }`} 
+  aria-hidden="true">
+        ⌄  
+      </span>
+  
+  </button>
+  {showGradeBreakdown && (
+    <div className="boulder-grade-breakdown">
+      {gradeCounts.map(({ grade, count }) => (
+        <div className="boulder-grade-row" key={grade}>
+          <span>Poziom {grade}</span>
+          <strong>{count}</strong>
+        </div>
+      ))}
+    </div>
+  )}
+</div>
+
 
           <WallMap
             sectors={sectors}

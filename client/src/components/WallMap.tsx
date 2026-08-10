@@ -663,13 +663,13 @@ export function WallMap({
                 <g
                   key={segment.id}
                   
-                  className={`
-                    topo-segment 
-                    ${highlightClass} 
-                    ${active ? "is-active" : ""} 
-                    ${muted ? "is-muted" : ""}
-                    ${keepVisible ? "keep-visible" : ""}
-                    `}
+                  className="topo-segment"
+                  //{`topo-segment 
+                    //${highlightClass} 
+                    //  ${active ? "is-active" : ""} 
+                    //  ${muted ? "is-muted" : ""}
+                    //  ${keepVisible ? "keep-visible" : ""}
+                    //`}
 
                   role="button"
                   tabIndex={0}
@@ -724,7 +724,13 @@ export function WallMap({
                   ? "is-highlight-removal"
                   : "";
               return (
-                <g key={sector.id} className={`map-sector-label ${highlightClass} ${active ? "is-active" : ""} ${muted ? "is-muted" : ""}`}>
+                
+                <g key={sector.id} 
+                className={`map-sector-label 
+                ${highlightClass} 
+                ${active ? "is-active" : ""} 
+                ${muted ? "is-muted" : ""}`}>
+                
                   <text x={sector.label.x} y={sector.label.y} textAnchor="middle">
                     {lines.map((line, i) => (
                       <tspan key={line} x={sector.label.x} dy={i === 0 ? 0 : 24}>
