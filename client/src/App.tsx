@@ -357,46 +357,49 @@ function App() {
       <section className="map-workspace" aria-label="Mapa sektorów Karma">
         <div className="map-stage">
           
-          <div
-  className={`boulder-count-overlay ${
-    showGradeBreakdown ? "is-open" : "" 
-  }`}
-  onClick={() => setShowGradeBreakdown((open) => !open)}
-    
->
-  
-  <button
-    type="button"
-    className="boulder-count-button"
-    aria-expanded={showGradeBreakdown}
-    aria-label="Liczba boulderów według trudności"
+          {!selectedSector && (
+  <div
+    className={`boulder-count-overlay ${
+      showGradeBreakdown ? "is-open" : ""
+    }`}
+    onClick={() => setShowGradeBreakdown((open) => !open)}
   >
-    <strong>{visibleBoulderCount}</strong>
-    <span className="boulder-count-label">
-      BOULDERY
-      <br />
-      NA MAPIE
-    </span>
-    
-    <span className={`boulder-count-chevron ${showGradeBreakdown ?
-    "is-open" : ""
-  }`} 
-  aria-hidden="true">
-        ⌄  
+    <button
+      type="button"
+      className="boulder-count-button"
+      aria-expanded={showGradeBreakdown}
+      aria-label="Liczba boulderów według trudności"
+    >
+      <strong>{visibleBoulderCount}</strong>
+
+      <span className="boulder-count-label">
+        BOULDERY
+        <br />
+        NA MAPIE
       </span>
-  
-  </button>
-  {showGradeBreakdown && (
-    <div className="boulder-grade-breakdown">
-      {gradeCounts.map(({ grade, count }) => (
-        <div className="boulder-grade-row" key={grade}>
-          <span>Poziom {grade}</span>
-          <strong>{count}</strong>
-        </div>
-      ))}
-    </div>
-  )}
-</div>
+
+      <span
+        className={`boulder-count-chevron ${
+          showGradeBreakdown ? "is-open" : ""
+        }`}
+        aria-hidden="true"
+      >
+        ⌄
+      </span>
+    </button>
+
+    {showGradeBreakdown && (
+      <div className="boulder-grade-breakdown">
+        {gradeCounts.map(({ grade, count }) => (
+          <div className="boulder-grade-row" key={grade}>
+            <span>Poziom {grade}</span>
+            <strong>{count}</strong>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+)}
 
 
           <WallMap
