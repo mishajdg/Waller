@@ -187,7 +187,7 @@ export function WallMap({
     vb: ViewBox;        // viewBox przy starcie pincza
   } | null>(null);
   const isPinchingRef = useRef(false);
-
+  const suppressClickAfterPinchRef = useRef(false); // Zapobiega kliknięciu po pinczu (na telefonie)
   // Minimalne i maksymalne powiększenie (w SVG units szerokości viewBox)
   // MIN_ZOOM_W = maksymalne przybliżenie (mały viewBox = duże przybliżenie)
   // MAX_ZOOM_W = maksymalne oddalenie (duży viewBox = mały zoom)
@@ -401,6 +401,9 @@ export function WallMap({
       isPanningRef.current = false;
       setIsPanningVisual(false);
       isPinchingRef.current = true;
+
+      suppressClickAfterPinchRef.current = true; // zapobiega kliknięciu po pinczu
+
       const t0 = e.touches[0];
       const t1 = e.touches[1];
       const dist = Math.hypot(t1.clientX - t0.clientX, t1.clientY - t0.clientY);
@@ -484,6 +487,8 @@ export function WallMap({
   const handleTouchEnd = (e: TouchEvent<SVGSVGElement>) => {
     if (e.touches.length < 2) {
       // Kończ pinch gdy którykolwiek palec zostaje uniesiony
+      if (isPinchingRef.current) {suppressClickAfterPinchRef.current = true;
+        window.setTimeout(() => {suppressClickAfterPinchRef.current = false;}, 275);} // reset flagi po pinczu
       isPinchingRef.current = false;
       pinchStartRef.current = null;
     }
@@ -495,6 +500,12 @@ export function WallMap({
     }
   };
 
+  const handleSvgClickCapture = (e: MouseEvent<SVGSVGElement>) => {
+    if (suppressClickAfterPinchRef.current) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      suppressClickAfterPinchRef.current = false; }}; // reset flagi po zignorowaniu kliknięcia
   const handleSvgClick = (e: MouseEvent<SVGSVGElement>) => {
     // Kliknięcie w puste miejsce na mapie (piny i sektory używają e.stopPropagation()):
     // - Jeśli był drag — ignoruj (to był pan, nie klik).
@@ -502,6 +513,7 @@ export function WallMap({
     //   Piny i sektory używają e.stopPropagation(), więc ich kliknięcia NIE dochodzą tutaj.
     // Aby wyłączyć zamykanie przez klik poza: zakomentuj clearZoom() poniżej.
     if (hasDraggedRef.current) return;
+    if (suppressClickAfterPinchRef.current) {suppressClickAfterPinchRef.current = false; return;} // ignoruj klik po pinczu
     if (zoomedSectorId) {
       clearZoom();
     }
@@ -520,6 +532,7 @@ export function WallMap({
           role="img"
           aria-labelledby="map-title map-desc"
           onClick={handleSvgClick}
+          //onClickCapture={handleSvgClickCapture}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
