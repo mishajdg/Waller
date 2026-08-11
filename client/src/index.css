@@ -768,7 +768,7 @@ dd {
     font-size: 0.66rem;
   }
 
-  .map-sector-label text { font-size: 25px; }
+  .map-sector-label text { font-size: 43px; }
 
   .inspector { padding: 20px; }
   .data-list div { grid-template-columns: 1fr; gap: 5px; }
