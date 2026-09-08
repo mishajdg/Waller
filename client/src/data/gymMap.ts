@@ -128,7 +128,7 @@ export const sectors: Sector[] = [
     settingDate: "2026-06-01",
     removalDate: "2026-07-15",
     author: "Routesetter Karma",
-    description: "Dolny prawy slab, spokojne wejścia i techniczne linie na nogi.",
+    description: "Slab -3°/-2°",
   },
 
   // ─── S02: PRAWY COMPWALL — prawa kolumna dolna (linia: N8→N9) ─────────────
@@ -167,7 +167,7 @@ export const sectors: Sector[] = [
     settingDate: "2026-06-01",
     removalDate: "2026-07-15",
     author: "Routesetter Karma",
-    description: "Prawa część compwalla z liniami kompresyjnymi i dynamicznymi.",
+    description: "Przewieszenie 10° z V-ką 15°",
   },
 
   // ─── S03: LEWY COMPWALL — prawa kolumna górna (linia: N7→N8) ──────────────
@@ -207,7 +207,7 @@ export const sectors: Sector[] = [
     settingDate: "2026-06-01",
     removalDate: "2026-07-15",
     author: "Routesetter Karma",
-    description: "Lewa część compwalla, dobre miejsce na bouldery zawodnicze.",
+    description: "Przewis 15° z V-ką 20°",
   },
 
   // ─── S04: PRAWY DACH — górna prawa belka (linia: N5→N6→N7) ────────────────
@@ -256,7 +256,7 @@ export const sectors: Sector[] = [
     settingDate: "2026-05-20",
     removalDate: "2026-07-01",
     author: "Routesetter Karma",
-    description: "Prawy dach — duże przewisy po prawej stronie hali.",
+    description: "Przełamane przewieszenie 35°/65° z prawą płytą 25°",
   },
 
   // ─── S05: LEWY DACH — górna środkowa belka (linia: N3→N4→N5) ──────────────
@@ -313,7 +313,7 @@ export const sectors: Sector[] = [
     settingDate: "2026-05-20",
     removalDate: "2026-07-01",
     author: "Routesetter Karma",
-    description: "Siła techniki się nie boi.",
+    description: "Przełamany dach 65°/40°",
   },
 
   // ─── S06: BECZKA — górna lewa belka (linia: N1→N2→N3) ─────────────────────
@@ -365,7 +365,7 @@ polygons: [
     settingDate: "2026-05-15",
     removalDate: "2026-06-27",
     author: "Routesetter Karma",
-    description: "Beczkowata formacja i obwodowe sekwencje.",
+    description: "Beczka 35°/5° oraz slab -2°",
   },
 
  // ─── S07: LOGO — dolna krawędź hexagonu (linia: H4→H5→H6) ─────────────────
@@ -421,7 +421,7 @@ polygons: [
     settingDate: "2026-05-08",
     removalDate: "2026-06-20",
     author: "Routesetter Karma",
-    description: "Dolna krawędź centralnej bryły, przewis z logo i liniami rozgrzewkowymi.",
+    description: "Pion z przełamanym przewieszeniem 30°/10°",
   },
 
   // ─── S08: CZUJNY PION — prawa krawędź hexagonu (linia: H3→H4) ─────────────
@@ -455,7 +455,7 @@ polygons: [
     settingDate: "2026-05-08",
     removalDate: "2026-06-20",
     author: "Routesetter Karma",
-    description: "Prawy dolny fragment centralnej bryły; pion i delikatne ustawienia na balans.",
+    description: "Pion",
   },
 
   // polygon: [
@@ -494,7 +494,7 @@ polygons: [
     settingDate: "2026-05-15",
     removalDate: "2026-06-27",
     author: "Routesetter Karma",
-    description: "Kompromis siły i techniki. Mały przewis - szeroki wachlarz ruchów. ",
+    description: "przewieszenie 25°",
   },
 
   // ─── S10: ŚREDNI PRZEWIS — górna krawędź hexagonu (linia: H1→H2) ──────────
@@ -527,7 +527,7 @@ polygons: [
     settingDate: "2026-05-15",
     removalDate: "2026-06-27",
     author: "Routesetter Karma",
-    description: "40-sto stopniowa płyta zwężająca się ku dołowi",
+    description: "przewieszenie 40°",
   },
 
   // ─── S11: DUŻY PRZEWIS — lewa krawędź hexagonu (linia: H6→H1) ─────────────
@@ -577,7 +577,7 @@ polygons: [
     settingDate: "2026-05-08",
     removalDate: "2026-06-20",
     author: "Routesetter Karma",
-    description: "50 stopni wyzwania dla bicepsów",
+    description: "przełamane przewieszenie 50°/30°",
   },
 
   // ─── S12: SPRAYWALL — lewa pionowa ściana (zamknięty prostokąt z wcięciami) ─
@@ -647,7 +647,7 @@ polygons: [
     settingDate: "2026-06-01",
     removalDate: "2026-08-01",
     author: "Routesetter Karma",
-    description: "Wszechstronne narzędzie do osiągania Twoich celów wspinaczkowych",
+    description: "",
   },];
 
 
