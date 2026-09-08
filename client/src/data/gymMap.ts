@@ -128,7 +128,7 @@ export const sectors: Sector[] = [
     settingDate: "2026-06-01",
     removalDate: "2026-07-15",
     author: "Routesetter Karma",
-    description: "Slab -3°/-2°",
+    description: "Slab -3°",
   },
 
   // ─── S02: PRAWY COMPWALL — prawa kolumna dolna (linia: N8→N9) ─────────────
@@ -207,7 +207,7 @@ export const sectors: Sector[] = [
     settingDate: "2026-06-01",
     removalDate: "2026-07-15",
     author: "Routesetter Karma",
-    description: "Przewis 15° z V-ką 20°",
+    description: "Przewieszenie 15° z V-ką 20°",
   },
 
   // ─── S04: PRAWY DACH — górna prawa belka (linia: N5→N6→N7) ────────────────
@@ -494,7 +494,7 @@ polygons: [
     settingDate: "2026-05-15",
     removalDate: "2026-06-27",
     author: "Routesetter Karma",
-    description: "przewieszenie 25°",
+    description: "Przewieszenie 25°",
   },
 
   // ─── S10: ŚREDNI PRZEWIS — górna krawędź hexagonu (linia: H1→H2) ──────────
@@ -527,7 +527,7 @@ polygons: [
     settingDate: "2026-05-15",
     removalDate: "2026-06-27",
     author: "Routesetter Karma",
-    description: "przewieszenie 40°",
+    description: "Przewieszenie 40°",
   },
 
   // ─── S11: DUŻY PRZEWIS — lewa krawędź hexagonu (linia: H6→H1) ─────────────
@@ -577,7 +577,7 @@ polygons: [
     settingDate: "2026-05-08",
     removalDate: "2026-06-20",
     author: "Routesetter Karma",
-    description: "przełamane przewieszenie 50°/30°",
+    description: "Przełamane przewieszenie 50°/30°",
   },
 
   // ─── S12: SPRAYWALL — lewa pionowa ściana (zamknięty prostokąt z wcięciami) ─
