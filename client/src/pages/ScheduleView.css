@@ -1,0 +1,230 @@
+/*
+ * ScheduleView.css — widok grafiku sekcji wspinaczkowych
+ * =========================================================
+ * Reużywa .app-shell / .app-kiosk-header / .karma-header-brand / .eyebrow /
+ * .mode-pill z index.css (te same co MapPage — spójny wygląd nagłówka).
+ * Reszta to nowe klasy specyficzne dla tego widoku.
+ */
+
+.schedule-header-actions {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.schedule-loading {
+  display: grid;
+  gap: 8px;
+  padding: 40px 4px;
+  color: #ffffff;
+}
+
+.schedule-intro {
+  padding: 8px 4px 20px;
+}
+
+.schedule-intro h1 {
+  margin: 0 0 6px;
+}
+
+.schedule-lead {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.95rem;
+}
+
+.schedule-error {
+  margin: 0 0 16px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  color: #ffffff;
+  background: rgba(207, 64, 54, 0.28);
+  border: 1px solid rgba(207, 64, 54, 0.4);
+  font-weight: 650;
+}
+
+.schedule-list {
+  display: grid;
+  gap: 16px;
+  padding-bottom: 32px;
+}
+
+.schedule-section-card {
+  padding: 20px;
+  border-radius: var(--radius-large);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.schedule-section-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.schedule-section-header h2 {
+  margin: 4px 0 0;
+  color: var(--ink);
+  font-size: 1.3rem;
+}
+
+.schedule-kind-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  color: var(--karma-teal-dark);
+  background: rgba(42, 138, 130, 0.12);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.schedule-instructor {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.schedule-price {
+  flex-shrink: 0;
+  color: var(--ink);
+  font-weight: 800;
+  font-size: 0.92rem;
+  white-space: nowrap;
+}
+
+.schedule-description {
+  margin: 10px 0 0;
+  color: #4a5a4a;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.schedule-empty-note {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.schedule-occurrence-list {
+  display: grid;
+  gap: 10px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.schedule-occurrence-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--paper-strong);
+}
+
+.schedule-occurrence-when {
+  display: grid;
+  gap: 3px;
+  color: var(--ink);
+  font-size: 0.92rem;
+}
+
+.schedule-spots {
+  color: #19a463;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.schedule-spots.is-full {
+  color: #b5651d;
+}
+
+.schedule-occurrence-action,
+.schedule-phone-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.schedule-book-button {
+  min-height: 40px;
+  padding: 0 16px;
+  border: 2px solid var(--karma-teal);
+  border-radius: 12px;
+  color: #ffffff;
+  background: var(--karma-teal);
+  font-weight: 800;
+  font-size: 0.86rem;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease;
+}
+
+.schedule-book-button:hover:not(:disabled) {
+  background: var(--karma-teal-light);
+  border-color: var(--karma-teal-light);
+}
+
+.schedule-book-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.schedule-cancel-button {
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid rgba(122, 31, 25, 0.3);
+  border-radius: 12px;
+  color: #7a1f19;
+  background: rgba(207, 64, 54, 0.08);
+  font-weight: 750;
+  font-size: 0.86rem;
+  cursor: pointer;
+}
+
+.schedule-booking-status {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.schedule-booking-status.confirmed {
+  color: #0f6842;
+  background: rgba(31, 157, 103, 0.14);
+}
+
+.schedule-booking-status.waitlisted {
+  color: #b5651d;
+  background: rgba(240, 139, 34, 0.14);
+}
+
+.schedule-phone-form input {
+  min-height: 40px;
+  min-width: 0;
+  width: 150px;
+  padding: 0 10px;
+  border: 1px solid rgba(67, 56, 42, 0.2);
+  border-radius: 12px;
+  color: #29251e;
+  background: #ffffff;
+  font: inherit;
+  font-size: 0.86rem;
+}
+
+@media (max-width: 480px) {
+  .schedule-occurrence-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .schedule-phone-form {
+    flex-wrap: wrap;
+  }
+  .schedule-phone-form input {
+    width: 100%;
+  }
+}

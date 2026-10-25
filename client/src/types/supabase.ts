@@ -193,6 +193,150 @@ export interface Database {
           role?: "admin" | "viewer";
         };
       };
+      instructors: {
+        Row: {
+          id: string;
+          gym_id: string;
+          name: string;
+          bio: string;
+          is_active: boolean;
+          sort_order: number;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          gym_id: string;
+          name: string;
+          bio?: string;
+          is_active?: boolean;
+          sort_order?: number;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          gym_id?: string;
+          name?: string;
+          bio?: string;
+          is_active?: boolean;
+          sort_order?: number;
+          updated_at?: string;
+        };
+      };
+      class_sections: {
+        Row: {
+          id: string;
+          gym_id: string;
+          name: string;
+          description: string;
+          kind: "recurring" | "dropin" | "individual";
+          instructor_id: string | null;
+          default_capacity: number;
+          price_info: string;
+          is_active: boolean;
+          sort_order: number;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          gym_id: string;
+          name: string;
+          description?: string;
+          kind?: "recurring" | "dropin" | "individual";
+          instructor_id?: string | null;
+          default_capacity?: number;
+          price_info?: string;
+          is_active?: boolean;
+          sort_order?: number;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          gym_id?: string;
+          name?: string;
+          description?: string;
+          kind?: "recurring" | "dropin" | "individual";
+          instructor_id?: string | null;
+          default_capacity?: number;
+          price_info?: string;
+          is_active?: boolean;
+          sort_order?: number;
+          updated_at?: string;
+        };
+      };
+      class_occurrences: {
+        Row: {
+          id: string;
+          gym_id: string;
+          section_id: string;
+          starts_at: string;
+          ends_at: string;
+          capacity: number;
+          confirmed_count: number;
+          waitlisted_count: number;
+          status: "scheduled" | "cancelled";
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          gym_id: string;
+          section_id: string;
+          starts_at: string;
+          ends_at: string;
+          capacity: number;
+          status?: "scheduled" | "cancelled";
+          created_at?: string;
+          // confirmed_count/waitlisted_count: brak w Insert — utrzymywane wyłącznie
+          // przez trigger public.refresh_occurrence_counts_and_promote(), zawsze
+          // startują od DEFAULT 0 na nowym terminie
+        };
+        Update: {
+          id?: string;
+          gym_id?: string;
+          section_id?: string;
+          starts_at?: string;
+          ends_at?: string;
+          capacity?: number;
+          status?: "scheduled" | "cancelled";
+          // confirmed_count/waitlisted_count celowo pominięte — patrz wyżej
+        };
+      };
+      bookings: {
+        Row: {
+          id: string;
+          gym_id: string;
+          occurrence_id: string;
+          client_user_id: string;
+          client_name: string;
+          client_phone: string;
+          status: "confirmed" | "waitlisted" | "cancelled";
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          // gym_id: brak w Insert — wypełniane serwerowo triggerem
+          // public.handle_booking_insert() z class_occurrences, klient go nie podaje
+          occurrence_id: string;
+          client_user_id: string;
+          client_name: string;
+          client_phone?: string;
+          created_at?: string;
+          updated_at?: string;
+          // status: brak w Insert — trigger sam ustawia 'confirmed'/'waitlisted'
+          // zależnie od zajętości w momencie zapisu
+        };
+        Update: {
+          id?: string;
+          // Jedyna dozwolona zmiana klienta to anulowanie własnej rezerwacji —
+          // RLS (WITH CHECK) i tak wymusza status: 'cancelled' dla nie-admina
+          status?: "confirmed" | "waitlisted" | "cancelled";
+          updated_at?: string;
+        };
+      };
     };
     Functions: {
       is_admin: {

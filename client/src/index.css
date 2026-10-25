@@ -75,6 +75,7 @@ button:focus-visible,
 .header-mode-btn-wrap {
   display: flex;
   align-items: center;
+  gap: 8px;
 }
 
 .mode-pill {

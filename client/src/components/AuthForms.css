@@ -1,0 +1,188 @@
+/*
+ * AuthForms.css — style dialogów logowania i rejestracji (AuthDialog, LoginForm, RegisterForm)
+ * ===========================================================================================
+ * Klasy .login-* były używane przez LoginForm, ale nie miały żadnych definicji w index.css.
+ * Wygląd zgodny z resztą aplikacji: kremowa karta (--paper), teal Karma jako akcent,
+ * pola jak w .admin-form. Zmienne (--paper, --ink, --karma-teal*) pochodzą z :root w index.css.
+ *
+ * Globalne h2 i .eyebrow są białe (pod teal tło aplikacji), więc w karcie
+ * przywracamy ciemne kolory — tak samo jak robi to .karma-drawer.
+ */
+
+.login-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300; /* nad drawerem (z-50) i modalem admina (z-200) */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  padding: max(18px, env(safe-area-inset-top)) 18px max(18px, env(safe-area-inset-bottom));
+  background: rgba(20, 60, 56, 0.72);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.login-card {
+  position: relative;
+  width: min(420px, 100%);
+  /* margin: auto centruje kartę w pionie, a gdy jest wyższa niż ekran
+   * (np. otwarta klawiatura) pozwala normalnie przewijać overlay */
+  margin: auto;
+  padding: 26px 22px 22px;
+  border: 1px solid rgba(26, 107, 90, 0.15);
+  border-radius: var(--radius-large);
+  color: var(--ink);
+  background: var(--paper);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+}
+
+.login-card h2 {
+  color: var(--ink);
+  font-size: 1.55rem;
+}
+
+.login-card .eyebrow {
+  color: var(--karma-teal-dark);
+}
+
+.login-header {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 18px;
+  padding-right: 28px; /* miejsce na przycisk × */
+}
+
+.login-header p:not(.eyebrow) {
+  margin: 0;
+  color: #4a5a4a;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.login-header .login-hint {
+  color: #766f62;
+  font-size: 0.85rem;
+}
+
+.login-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  color: #4a4a4a;
+  background: rgba(0, 0, 0, 0.06);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.login-close:hover {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.login-form {
+  display: grid;
+  gap: 14px;
+}
+
+.login-form label {
+  display: grid;
+  gap: 6px;
+}
+
+.login-form label > span {
+  color: #766f62;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.login-form input {
+  width: 100%;
+  min-height: 46px;
+  padding: 0 12px;
+  border: 1px solid rgba(67, 56, 42, 0.2);
+  border-radius: 14px;
+  color: #29251e;
+  background: #ffffff;
+  font: inherit;
+  font-size: 1rem; /* 16px — iOS nie przybliża strony po wejściu w pole */
+  font-weight: 600;
+}
+
+.login-form input::placeholder {
+  color: #a39d90;
+  font-weight: 500;
+}
+
+.login-form input:focus-visible {
+  outline: none;
+  border-color: var(--karma-teal);
+  box-shadow: 0 0 0 3px rgba(42, 138, 130, 0.22);
+}
+
+.login-error {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  color: #7a1f19;
+  background: rgba(207, 64, 54, 0.1);
+  font-size: 0.9rem;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+.login-submit {
+  width: 100%;
+  min-height: 48px;
+  border: 2px solid var(--karma-teal);
+  border-radius: 14px;
+  color: #ffffff;
+  background: var(--karma-teal);
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 180ms ease, border-color 180ms ease, opacity 180ms ease, transform 80ms ease;
+}
+
+.login-submit:hover:not(:disabled) {
+  border-color: var(--karma-teal-light);
+  background: var(--karma-teal-light);
+}
+
+.login-submit:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.login-submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.login-switch {
+  margin: 16px 0 0;
+  color: #4a5a4a;
+  font-size: 0.92rem;
+  text-align: center;
+}
+
+.login-switch-button {
+  padding: 0;
+  border: 0;
+  color: var(--karma-teal-dark);
+  background: transparent;
+  font: inherit;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}

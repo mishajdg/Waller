@@ -109,3 +109,90 @@ export type SnapCandidate = {
   accepted: boolean;
   threshold: number;
 };
+
+/**
+ * ============================================================
+ * MODUŁ REZERWACJI — sekcje wspinaczkowe (booking, Booksy-style)
+ * Patrz supabase/003_class_sections.sql dla dokładnego schematu.
+ * ============================================================
+ */
+export type SectionKind = "recurring" | "dropin" | "individual";
+export type OccurrenceStatus = "scheduled" | "cancelled";
+export type BookingStatus = "confirmed" | "waitlisted" | "cancelled";
+
+/** Instruktor — patrz supabase/004_instructors.sql. Encja, nie wolny tekst. */
+export type Instructor = {
+  id: string;
+  gymId: string;
+  name: string;
+  bio: string;
+  isActive: boolean;
+};
+
+export type ClassSection = {
+  id: string;
+  gymId: string;
+  name: string;
+  description: string;
+  kind: SectionKind;
+  instructorId: string | null;
+  defaultCapacity: number;
+  priceInfo: string;
+  isActive: boolean;
+};
+
+export type ClassOccurrence = {
+  id: string;
+  sectionId: string;
+  startsAt: string; // ISO datetime
+  endsAt: string; // ISO datetime
+  capacity: number;
+  confirmedCount: number;
+  waitlistedCount: number;
+  status: OccurrenceStatus;
+};
+
+export type Booking = {
+  id: string;
+  occurrenceId: string;
+  clientUserId: string;
+  clientName: string;
+  clientPhone: string;
+  status: BookingStatus;
+  createdAt: string;
+};
+
+/** Widok złożony dla UI: termin + policzone miejsca + własna rezerwacja klienta (jeśli jest) */
+export type OccurrenceWithAvailability = ClassOccurrence & {
+  spotsLeft: number;
+  myBooking: Booking | null;
+};
+
+/** Sekcja razem z jej nadchodzącymi terminami — jednostka renderowana w widoku grafiku.
+ *  instructorName jest doliczane przez useClassSchedule (join po stronie klienta z
+ *  instructors) — wygodne do wyświetlenia, nie jest to kolumna w bazie. */
+export type SectionSchedule = {
+  section: ClassSection & { instructorName: string | null };
+  occurrences: OccurrenceWithAvailability[];
+};
+
+/** Zagregowane statystyki admina — patrz useAdminStats. Liczone z class_occurrences
+ *  (publicznie czytelne liczniki), bez dotykania bookings. */
+export type SectionStats = {
+  sectionId: string;
+  sectionName: string;
+  occurrenceCount: number;
+  totalConfirmed: number;
+  totalCapacity: number;
+  occupancyRate: number; // 0..1, 0 gdy totalCapacity===0
+};
+
+export type AdminStats = {
+  totalSections: number;
+  totalInstructors: number;
+  upcomingOccurrenceCount: number;
+  pastOccurrenceCount: number;
+  totalConfirmedBookings: number;
+  totalWaitlisted: number;
+  bySection: SectionStats[];
+};
