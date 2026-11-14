@@ -21,6 +21,9 @@
   --karma-teal: #2a8a82;         /* ← główny kolor Karma z brand reference */
   --karma-teal-light: #3aada5;   /* ← jaśniejszy wariant */
   --karma-teal-dark: #1d6b65;    /* ← ciemniejszy wariant (hover, border) */
+  --karma-petrol: #2a8a82d7;       /* stonowany petrol — pigułki */
+  --map-paper: #fffdf8;          /* kolor papieru mapy (także odstęp wokół kółek) */
+
 }
 
 * { box-sizing: border-box; }
@@ -467,7 +470,7 @@ pointer-events: none;
 }
 
 .pin-dot-core {
-  stroke: rgba(255, 255, 255, 0.92);
+  stroke: rgba(255, 255, 255, 0.459);
   stroke-width: 2.1;
   filter: url(#dotShadow);
 }
@@ -1228,7 +1231,7 @@ dd {
 }
 
 .topo-paper-base {
-  fill: #fffdf8;
+  fill: var(--map-paper);
   stroke: none;
   stroke-width: 1.2;
   filter: drop-shadow(0 18px 42px rgba(26, 61, 52, 0.12));
@@ -1265,13 +1268,24 @@ dd {
 .topo-segment.is-active.is-highlight-removal .topo-line {
   stroke-width: 5.6;
 }
+/* Pigułka „nowe" / „stare" przy nazwie sektora (zamiast zielonego/czerwonego napisu) */
+.sector-pill {
+  pointer-events: none;
+  font-size: 23px;               /* = rozmiar etykiety; geometria pigułki liczona w em */
+  transition: opacity 180ms ease;
+}
+@media (max-width: 640px) { .sector-pill { font-size: 40px; } }   /* jak .map-sector-label text */
+.sector-pill.is-muted { opacity: 0.18; }
+.sector-pill rect { fill: var(--karma-petrol); }
+.sector-pill text {
+  fill: #eaf1ef;
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  font-weight: 500;
+}
+.sector-pill.is-removal rect { fill: none; stroke: var(--karma-petrol); stroke-width: 0.09em; }
+.sector-pill.is-removal text { fill: var(--karma-petrol); }
 
-.map-sector-label.is-highlight-new text { fill: #0f6842; font-weight: 850; }
-.map-sector-label.is-highlight-removal text { fill: #9f2f28; font-weight: 850; }
-.map-sector-label.is-highlight-new circle { fill: #1f9d67; }
-.map-sector-label.is-highlight-removal circle { fill: #cf4036; }
-.map-sector-label.is-highlight-new.is-muted,
-.map-sector-label.is-highlight-removal.is-muted { opacity: 0.36; }
+
 
 .admin-highlight-actions {
   display: grid;

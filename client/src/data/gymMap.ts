@@ -55,31 +55,32 @@ export const MAP_SIZE = {
 };
 
 export const HOLD_COLORS: Record<HoldColorKey, { label: string; hex: string; text: string }> = {
-  red:       { label: "Czerwony",      hex: "#df4438", text: "#ffffff" },
-  blue:      { label: "Niebieski",     hex: "#2478d4", text: "#ffffff" },
-  yellow:    { label: "Żółty",         hex: "#f2c84b", text: "#241a00" },
-  green:     { label: "Zielony",       hex: "#19a463", text: "#ffffff" },
-  orange:    { label: "Pomarańczowy",  hex: "#f08b22", text: "#221407" },
-  purple:    { label: "Fioletowy",     hex: "#7759cf", text: "#ffffff" },
-  black:     { label: "Czarny",        hex: "#242424", text: "#ffffff" },
-  white:     { label: "Biały",         hex: "#f7f1e4", text: "#27231e" },
+  red:       { label: "Czerwony",      hex: "#ce5140", text: "#ffffff" },
+  blue:      { label: "Niebieski",     hex: "#3c77cb", text: "#ffffff" },
+  yellow:    { label: "Żółty",         hex: "#ecc961", text: "#241a00" },
+  green:     { label: "Zielony",       hex: "#4ba268", text: "#ffffff" },
+  orange:    { label: "Pomarańczowy",  hex: "#e48e3e", text: "#221407" },
+  purple:    { label: "Fioletowy",     hex: "#7059c6", text: "#ffffff" },
+  black:     { label: "Czarny",        hex: "#222222", text: "#ffffff" },
+  white:     { label: "Biały",         hex: "#f5f1e6", text: "#27231e" },
   lightBlue: { label: "Błękitny",      hex: "#7fc8f8", text: "#12263a" },
   gray:      { label: "Szary",         hex: "#8d8a84", text: "#ffffff" },
-  pink:      { label: "Różowy",        hex: "#e64fa3", text: "#ffffff" },
+  pink:      { label: "Różowy",        hex: "#d859a1", text: "#ffffff" },
 };
 
 export const GRADE_COLORS: Record<BoulderGrade, GradeColorDefinition> = {
-  1:  { label: "1 — biały",        hex: "#f7f1e4", text: "#27231e" },
-  2:  { label: "2 — żółty",        hex: "#f2c84b", text: "#241a00" },
-  3:  { label: "3 — pomarańczowy", hex: "#f08b22", text: "#221407" },
-  4:  { label: "4 — czerwony",     hex: "#df4438", text: "#ffffff" },
-  5:  { label: "5 — fioletowy",    hex: "#7759cf", text: "#ffffff" },
-  6:  { label: "6 — różowy",       hex: "#e64fa3", text: "#ffffff" },
-  7:  { label: "7 — niebieski",    hex: "#2478d4", text: "#ffffff" },
-  8:  { label: "8 — zielony",      hex: "#19a463", text: "#ffffff" },
-  9:  { label: "9 — brązowy",      hex: "#7b4a28", text: "#ffffff" },
-  10: { label: "10 — czarny",      hex: "#242424", text: "#ffffff" },
+  1:  { label: "1 — biały",        hex: "#f5f1e6", text: "#27231e" },
+  2:  { label: "2 — żółty",        hex: "#ecc961", text: "#241a00" },
+  3:  { label: "3 — pomarańczowy", hex: "#e48e3e", text: "#221407" },
+  4:  { label: "4 — czerwony",     hex: "#ce5140", text: "#ffffff" },
+  5:  { label: "5 — fioletowy",    hex: "#7059c6", text: "#ffffff" },
+  6:  { label: "6 — różowy",       hex: "#d859a1", text: "#ffffff" },
+  7:  { label: "7 — niebieski",    hex: "#3c77cb", text: "#ffffff" },
+  8:  { label: "8 — zielony",      hex: "#4ba268", text: "#ffffff" },
+  9:  { label: "9 — brązowy",      hex: "#764b2d", text: "#ffffff" },
+  10: { label: "10 — czarny",      hex: "#222222", text: "#ffffff" },
 };
+
 
 
 const SCALE = 2.5

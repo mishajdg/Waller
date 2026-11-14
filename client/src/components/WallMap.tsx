@@ -90,6 +90,11 @@ const clamp = (value: number, min: number, max: number) =>
 const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
 const viewBoxToString = (box: ViewBox) =>
   `${box.x.toFixed(2)} ${box.y.toFixed(2)} ${box.width.toFixed(2)} ${box.height.toFixed(2)}`;
+// Pigułki przy nazwie sektora (zamiast zielonego/czerwonego napisu). Szerokość w em.
+const SECTOR_PILLS = {
+  new: { text: "nowe", width: 3.2 },
+  removal: { text: "stare", width: 3.6 },
+} as const;
 
 function getSectorLabelLines(sector: Sector) {
   const firstLine = sector.name;
@@ -736,23 +741,30 @@ export function WallMap({
                   : sector.highlight === "removal"
                   ? "is-highlight-removal"
                   : "";
+              const pill = sector.highlight ? SECTOR_PILLS[sector.highlight] : null;
               return (
-                
-                <g key={sector.id} 
-                className={`map-sector-label 
-                ${highlightClass} 
-                ${active ? "is-active" : ""} 
-                ${muted ? "is-muted" : ""}`}>
-                
-                  <text x={sector.label.x} y={sector.label.y} textAnchor="middle">
-                    {lines.map((line, i) => (
-                      <tspan key={line} x={sector.label.x} dy={i === 0 ? 0 : 24}>
-                        {line}
-                      </tspan>
-                    ))}
-                  </text>
+                <g key={sector.id}>
+                  <g className={`map-sector-label ${highlightClass} ${active ? "is-active" : ""} ${muted ? "is-muted" : ""}`}>
+                    <text x={sector.label.x} y={sector.label.y} textAnchor="middle">
+                      {lines.map((line, i) => (
+                        <tspan key={line} x={sector.label.x} dy={i === 0 ? 0 : 24}>
+                          {line}
+                        </tspan>
+                      ))}
+                    </text>
+                  </g>
+                  {pill && (
+                    <g
+                      className={`sector-pill is-${sector.highlight} ${muted ? "is-muted" : ""}`}
+                      transform={`translate(${sector.label.x} ${sector.label.y + (lines.length - 1) * 24})`}
+                    >
+                      <rect x={`${-pill.width / 2}em`} y="0.55em" width={`${pill.width}em`} height="1.45em" rx="0.725em" />
+                      <text y="1.54em" textAnchor="middle">{pill.text}</text>
+                    </g>
+                  )}
                 </g>
               );
+
             })}
           </g>
 
