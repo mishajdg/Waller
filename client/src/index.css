@@ -1268,22 +1268,28 @@ dd {
 .topo-segment.is-active.is-highlight-removal .topo-line {
   stroke-width: 5.6;
 }
-/* Pigułka „nowe" / „stare" przy nazwie sektora (zamiast zielonego/czerwonego napisu) */
-.sector-pill {
+/* Pigułka „nowe" / „stare" i licznik ⬡ × N przy nazwie sektora (geometria: SectorLabel.tsx, ustawienia: data/labelBadges.ts) */
+.sector-pill,
+.sector-counter {
   pointer-events: none;
-  font-size: 23px;               /* = rozmiar etykiety; geometria pigułki liczona w em */
   transition: opacity 180ms ease;
 }
-@media (max-width: 640px) { .sector-pill { font-size: 40px; } }   /* jak .map-sector-label text */
-.sector-pill.is-muted { opacity: 0.18; }
+.sector-pill.is-muted,
+.sector-counter.is-muted { opacity: 0.18; }
 .sector-pill rect { fill: var(--karma-petrol); }
 .sector-pill text {
   fill: #eaf1ef;
   font-family: 'IBM Plex Sans', system-ui, sans-serif;
   font-weight: 500;
 }
-.sector-pill.is-removal rect { fill: none; stroke: var(--karma-petrol); stroke-width: 0.09em; }
+.sector-pill.is-removal rect { fill: none; stroke: var(--karma-petrol); }
 .sector-pill.is-removal text { fill: var(--karma-petrol); }
+.sector-counter polygon { fill: none; stroke: #111111; stroke-linejoin: round; }
+.sector-counter text {
+  fill: #202020;
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  font-weight: 650;
+}
 
 
 

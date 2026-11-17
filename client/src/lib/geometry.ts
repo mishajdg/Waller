@@ -81,3 +81,13 @@ export const getSectorAtPoint = (point: Point, sectors: Sector[]) =>
 
 export const getSegmentsForSector = (sectorId: string, segments: WallSegment[]) =>
   segments.filter((segment) => segment.sectorId === sectorId);
+
+/** Sześciokąt foremny (wierzchołki z lewej i z prawej strony); r = promień okręgu opisanego. */
+export const hexPoints = (r: number) =>
+  Array.from({ length: 6 }, (_, i) => {
+    const a = (Math.PI / 3) * i;
+    return `${(r * Math.cos(a)).toFixed(2)},${(r * Math.sin(a)).toFixed(2)}`;
+  }).join(" ");
+
+export const HEX_PIN = hexPoints(20); // pin z cyfrą (po zoomie) — promień jak dawne kółko
+export const HEX_DOT = hexPoints(16); // dawna kropka z widoku ogólnego

@@ -14,7 +14,8 @@ import { useEffect, useMemo, useRef, useState, type KeyboardEvent, type MouseEve
 import type { BoulderPin, Point, Sector, Selection, WallSegment } from "../types";
 import { getGradeColor, getHoldColor, MAP_SIZE, matLines } from "../data/gymMap";
 import { getBouldersForSectorSorted } from "../lib/boulderLayout";
-import { polygonToPoints } from "../lib/geometry";
+import { HEX_DOT, HEX_PIN, polygonToPoints } from "../lib/geometry";
+import { SectorLabel } from "./SectorLabel";
 
 type WallMapProps = {
   sectors: Sector[];
@@ -90,11 +91,6 @@ const clamp = (value: number, min: number, max: number) =>
 const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
 const viewBoxToString = (box: ViewBox) =>
   `${box.x.toFixed(2)} ${box.y.toFixed(2)} ${box.width.toFixed(2)} ${box.height.toFixed(2)}`;
-// Pigułki przy nazwie sektora (zamiast zielonego/czerwonego napisu). Szerokość w em.
-const SECTOR_PILLS = {
-  new: { text: "nowe", width: 3.2 },
-  removal: { text: "stare", width: 3.6 },
-} as const;
 
 function getSectorLabelLines(sector: Sector) {
   const firstLine = sector.name;
@@ -247,6 +243,12 @@ export function WallMap({
     if (!zoomedSectorId) return [];
     return getBouldersForSectorSorted(boulders, zoomedSectorId);
   }, [boulders, zoomedSectorId]);
+// Liczba boulderów w każdym sektorze (licznik ⬡ × N w widoku ogólnym)
+  const countBySector = useMemo(() => {
+    const map = new Map<string, number>();
+    boulders.forEach((b) => map.set(b.sectorId, (map.get(b.sectorId) ?? 0) + 1));
+    return map;
+  }, [boulders]);
 
   /**
    * Sprawdź czy punkt (w przestrzeni sektora, przed WALL_OFFSET) jest widoczny w viewBox.
@@ -278,21 +280,9 @@ export function WallMap({
     return sector.polygons.some((polygon) => polygon.points.some((pt) => isPointInViewBox(pt, vb)));
   };
 
-  const visibleBoulders = zoomedSectorId
-    ? sortedZoomBoulders
-    : [...boulders]
-        .filter((b) => {
-          const sector = sectors.find((s) => s.id === b.sectorId);
-          if (!sector) return false;
-          // Pokaż pin jeśli sektor jest widoczny — nie filtrujemy pinów osobno
-          // (podwójne filtrowanie powodowało znikanie pinów przy krawędziach)
-          return isSectorInViewBox(sector, viewBox);
-        })
-        .sort((a, b) => {
-          if (a.sectorId !== b.sectorId) return a.sectorId.localeCompare(b.sectorId);
-          if (a.grade !== b.grade) return a.grade - b.grade;
-          return a.id.localeCompare(b.id);
-        });
+ // Piny (sześciokąty z cyfrą) tylko po zoomie w sektor; w widoku ogólnym zamiast nich licznik ⬡ × N
+  const visibleBoulders = zoomedSectorId ? sortedZoomBoulders : [];
+
 
   const clearZoom = () => {
     if (!zoomedSectorId) return;
@@ -731,41 +721,17 @@ export function WallMap({
 
           {/* Etykiety sektorów */}
           <g className="sector-label-layer" aria-hidden="true">
-            {sectors.map((sector) => {
-              const lines = getSectorLabelLines(sector);
-              const active = activeSectorId === sector.id;
-              const muted = Boolean(activeSectorId && !active);
-              const highlightClass =
-                sector.highlight === "new"
-                  ? "is-highlight-new"
-                  : sector.highlight === "removal"
-                  ? "is-highlight-removal"
-                  : "";
-              const pill = sector.highlight ? SECTOR_PILLS[sector.highlight] : null;
-              return (
-                <g key={sector.id}>
-                  <g className={`map-sector-label ${highlightClass} ${active ? "is-active" : ""} ${muted ? "is-muted" : ""}`}>
-                    <text x={sector.label.x} y={sector.label.y} textAnchor="middle">
-                      {lines.map((line, i) => (
-                        <tspan key={line} x={sector.label.x} dy={i === 0 ? 0 : 24}>
-                          {line}
-                        </tspan>
-                      ))}
-                    </text>
-                  </g>
-                  {pill && (
-                    <g
-                      className={`sector-pill is-${sector.highlight} ${muted ? "is-muted" : ""}`}
-                      transform={`translate(${sector.label.x} ${sector.label.y + (lines.length - 1) * 24})`}
-                    >
-                      <rect x={`${-pill.width / 2}em`} y="0.55em" width={`${pill.width}em`} height="1.45em" rx="0.725em" />
-                      <text y="1.54em" textAnchor="middle">{pill.text}</text>
-                    </g>
-                  )}
-                </g>
-              );
+                       {sectors.map((sector) => (
+              <SectorLabel
+                key={sector.id}
+                sector={sector}
+                lines={getSectorLabelLines(sector)}
+                active={activeSectorId === sector.id}
+                muted={Boolean(activeSectorId && activeSectorId !== sector.id)}
+                count={zoomedSectorId ? null : countBySector.get(sector.id) ?? 0}
+              />
+            ))}
 
-            })}
           </g>
 
             {/* Piny boulderów */}
@@ -805,21 +771,13 @@ export function WallMap({
                     }
                   }:undefined}
                 >
-                  {zoomed ? (
-                    <>
-                      <circle className="pin-hit" r="30" />
-                      <circle className="pin-outer" r="20" />
-                      <circle className="pin-core" r="20" fill={gradeColor.hex} />
-                      <text className="pin-grade" y="5" textAnchor="middle" fill={gradeColor.text}>
-                        {boulder.grade}
-                      </text>
-                    </>
-                  ) : (
-                    <>
-                   
-                      <circle className="pin-dot-core" r="16" fill={gradeColor.hex} />
-                    </>
-                  )}
+<circle className="pin-hit" r="30" />
+                  <polygon className="pin-outer" points={HEX_PIN} />
+                  <polygon className="pin-core" points={HEX_PIN} fill={gradeColor.hex} />
+                  <text className="pin-grade" y="5" textAnchor="middle" fill={gradeColor.text}>
+                    {boulder.grade}
+                  </text>
+
                 </g>
               );
             })}
