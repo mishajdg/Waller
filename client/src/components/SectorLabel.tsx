@@ -42,17 +42,43 @@ function useTextMetrics(ref: RefObject<SVGTextElement | null>, deps: unknown[]) 
   return m;
 }
 
+const norm = (s: string) => s.trim().toLowerCase();
+
+// Wyjątek dla sektora: szukany po kodzie ("3"), nazwie ("Lewy compwall") albo id (UUID); wielkość liter bez znaczenia
+function overrideFor<T>(map: Record<string, T>, sector: Sector): T | undefined {
+  const keys = [sector.code, sector.name, sector.id].map(norm);
+  const hit = Object.keys(map).find((k) => keys.includes(norm(k)));
+  return hit === undefined ? undefined : map[hit];
+}
+
+// Klucze z labelBadges.ts, które nie pasują do żadnego sektora (pokazuje je tryb ?debug=1)
+export function badgeOverrideProblems(sectors: Sector[]): string[] {
+  const known = new Set(sectors.flatMap((s) => [s.code, s.name, s.id].map(norm)));
+  const out: string[] = [];
+  const check = (name: string, map: Record<string, unknown>) =>
+    Object.keys(map).forEach((k) => {
+      if (!known.has(norm(k))) out.push(`${name}: klucz "${k}" nie pasuje do żadnego sektora`);
+    });
+  check("PILL_OVERRIDES", PILL_OVERRIDES);
+  check("COUNTER_OVERRIDES", COUNTER_OVERRIDES);
+  return out;
+}
+
 // Środek plakietki (cx, cy) względem nazwy sektora, wg ustawień z labelBadges.ts
 function place(s: BadgeStyle, m: Metrics, firstBase: number, lastBase: number, w: number, h: number) {
   const gap = s.gap * m.fs;
+  const pl = s.placement === "up" ? "above" : s.placement === "down" ? "below" : s.placement;
   let cx = m.x + m.w / 2;
   let cy = (firstBase + lastBase) / 2 - 0.3 * m.fs; // optyczny środek napisu
-  if (s.placement === "below") cy = lastBase + 0.25 * m.fs + gap + h / 2;
-  if (s.placement === "above") cy = firstBase - 0.7 * m.fs - gap - h / 2;
-  if (s.placement === "right") cx = m.x + m.w + gap + w / 2;
-  if (s.placement === "left") cx = m.x - gap - w / 2;
+  if (pl === "below") cy = lastBase + 0.25 * m.fs + gap + h / 2;
+  if (pl === "above") cy = firstBase - 0.7 * m.fs - gap - h / 2;
+  if (pl === "right") cx = m.x + m.w + gap + w / 2;
+  if (pl === "left") cx = m.x - gap - w / 2;
+  if (s.x !== undefined) cx = s.x; // położenie bezwzględne (jednostki mapy) nadpisuje placement
+  if (s.y !== undefined) cy = s.y;
   return { cx: cx + s.dx * m.fs, cy: cy + s.dy * m.fs };
 }
+
 
 type Props = {
   sector: Sector;
@@ -73,14 +99,14 @@ export function SectorLabel({ sector, lines, active, muted, count }: Props) {
 
   // pigułka „nowe" / „stare"
   const pill = sector.highlight ? SECTOR_PILLS[sector.highlight] : null;
-  const ps: BadgeStyle = { ...PILL_DEFAULT, ...PILL_OVERRIDES[sector.id] };
+  const ps: BadgeStyle = { ...PILL_DEFAULT, ...overrideFor(PILL_OVERRIDES, sector) };
   const pk = m ? m.fs * ps.scale : 0;
   const pw = pill ? pill.width * pk : 0;
   const ph = 1.45 * pk;
   const pp = m && pill ? place(ps, m, y, lastBase, pw, ph) : null;
 
   // licznik ⬡ × N
-  const cs: BadgeStyle = { ...COUNTER_DEFAULT, ...COUNTER_OVERRIDES[sector.id] };
+   const cs: BadgeStyle = { ...COUNTER_DEFAULT, ...overrideFor(COUNTER_OVERRIDES, sector) };
   const ck = m ? m.fs * cs.scale : 0;
   const hexR = 0.58 * ck;
   const hexW = 2 * hexR;
