@@ -19,12 +19,12 @@ export type BadgeStyle = {
 // Teksty pigułek i ich szerokość w em (przy scale = 1). Dłuższy tekst = większa szerokość.
 export const SECTOR_PILLS = {
   new: { text: "nowe", width: 3.2 },
-  removal: { text: "stare", width: 3.6 },
+  removal: { text: "stare", width: 2.75, placement: "down" },
 } as const;
 
 // Ustawienia domyślne — dla wszystkich sektorów
-export const PILL_DEFAULT: BadgeStyle = { placement: "right", scale: 0.85, gap: 0.5, dx: 0, dy: 0 };
-export const COUNTER_DEFAULT: BadgeStyle = { placement: "below", scale: 1.4, gap: 0.15, dx: 0, dy: 0 };
+export const PILL_DEFAULT: BadgeStyle = { placement: "above", scale: 0.75, gap: 0.4, dx: 0, dy: 0 };
+export const COUNTER_DEFAULT: BadgeStyle = { placement: "below", scale: 1.4, gap: 0.2, dx: 0, dy: 0 };
 
 // Wyjątki dla pojedynczych sektorów. Klucz = KOD sektora w cudzysłowie ("1", "2", … "12" — ten sam co w panelu
 // „SEKTOR 3"); działa też nazwa ("Lewy compwall") i pełne id (UUID). Wartość = tylko to, co zmieniasz.
@@ -36,9 +36,20 @@ export const PILL_OVERRIDES: Record<string, Partial<BadgeStyle>> = {
   // "6": { placement: "above", scale: 1.2 },
 };
 export const COUNTER_OVERRIDES: Record<string, Partial<BadgeStyle>> = {
-  // "3": { x: 1200, y: 500, scale: 1.2 }, // przykład: licznik w punkcie (1200, 500); własne X/Y odczytaj w trybie ?debug=1
-  // "10": { placement: "right", dx: 0.5 },
+"1": {  scale: 0.85 , placement: "below"  }, // Slab
+"2": {  scale: 0.85 , placement: "below"  }, 
+"3": {  scale: 0.85 , placement: "below"  }, 
+"4": {  scale: 0.85 , placement: "below"  },
+"5": {  scale: 0.85 , placement: "below"  },
+"6": {  scale: 0.85 , placement: "below"  },
+"7": {  scale: 0.85 , placement: "below"  },
+"8": {  scale: 0.85 , placement: "below"  },
+"9": {  scale: 0.85 , placement: "below"  },
+"10":{  scale: 0.85 , placement: "below"  },
+"11":{  scale: 0.85 , placement: "below"  },
+"12":{  scale: 0.85 , placement: "below"  },
 };
+
 
 
 // Znak między sześciokątem a liczbą (zmień na "x", jeśli wolisz)
